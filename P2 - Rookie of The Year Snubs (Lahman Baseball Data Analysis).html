@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>P2 - Rookie of The Year Snubs [Lahman Baseball Data Analysis]</title>
+<title>P2 - Rookie of The Year Snubs (Lahman Baseball Data Analysis)</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -192,7 +192,10 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Submission-History:">Submission History:<a class="anchor-link" href="#Submission-History:">&#182;</a></h5><p>*2015-Dec-24: Initial Udacity submit and upload to GitHub (<a href="https://github.com/benmesch/DataAnalysis.git">https://github.com/benmesch/DataAnalysis.git</a>)</p>
+<h5 id="Submission-History:">Submission History:<a class="anchor-link" href="#Submission-History:">&#182;</a></h5><ul>
+<li>2015-Dec-23: Initial Udacity submit and upload to GitHub (<a href="https://github.com/benmesch/DataAnalysis.git">https://github.com/benmesch/DataAnalysis.git</a>)</li>
+<li>2015-Dec-24: Code typos</li>
+</ul>
 
 </div>
 </div>
@@ -275,7 +278,7 @@ It is supplemented by these tables:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>First, we will import the Lahman data on all past Rookie of the Year recipients, 136 in total. Then we present a table of the first few dozen ROTY (starting with Jackie Robinson in 1947) and the most recent few dozen ROTY (ending with Jacob deGrom in 2014).</p>
+<p>First, we will import the Lahman data on all past Rookie of the Year recipients, 136 in total. Then we display the player backgrounds for the five first (starting with Jackie Robinson in 1947) and five most recent ROTY (ending with Jacob deGrom in 2014).</p>
 
 </div>
 </div>
@@ -317,14 +320,14 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[114]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">dfMaster</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">&#39;MASTER.csv&#39;</span><span class="p">)</span>
-<span class="n">dfMaster</span> <span class="o">=</span> <span class="n">dfMaster</span><span class="p">[[</span><span class="s">&#39;playerID&#39;</span><span class="p">,</span><span class="s">&#39;nameFirst&#39;</span><span class="p">,</span><span class="s">&#39;nameLast&#39;</span><span class="p">,</span><span class="s">&#39;nameGiven&#39;</span><span class="p">,</span><span class="s">&#39;debut&#39;</span><span class="p">,</span><span class="s">&#39;finalGame&#39;</span><span class="p">,</span><span class="s">&#39;birthYear&#39;</span><span class="p">,</span><span class="s">&#39;birthMonth&#39;</span><span class="p">,</span><span class="s">&#39;birthDay&#39;</span><span class="p">,</span><span class="s">&#39;birthCountry&#39;</span><span class="p">,</span><span class="s">&#39;weight&#39;</span><span class="p">,</span><span class="s">&#39;height&#39;</span><span class="p">,</span><span class="s">&#39;bats&#39;</span><span class="p">,</span><span class="s">&#39;throws&#39;</span><span class="p">]]</span>
+<span class="n">dfMaster</span> <span class="o">=</span> <span class="n">dfMaster</span><span class="p">[[</span><span class="s">&#39;playerID&#39;</span><span class="p">,</span><span class="s">&#39;nameFirst&#39;</span><span class="p">,</span><span class="s">&#39;nameLast&#39;</span><span class="p">,</span><span class="s">&#39;debut&#39;</span><span class="p">,</span><span class="s">&#39;finalGame&#39;</span><span class="p">,</span><span class="s">&#39;birthYear&#39;</span><span class="p">,</span><span class="s">&#39;birthMonth&#39;</span><span class="p">,</span><span class="s">&#39;birthDay&#39;</span><span class="p">,</span><span class="s">&#39;birthCountry&#39;</span><span class="p">,</span><span class="s">&#39;weight&#39;</span><span class="p">,</span><span class="s">&#39;height&#39;</span><span class="p">,</span><span class="s">&#39;bats&#39;</span><span class="p">,</span><span class="s">&#39;throws&#39;</span><span class="p">]]</span>
 <span class="n">dfROTYwinners</span> <span class="o">=</span> <span class="n">dfROTYwinners</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dfMaster</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">&#39;inner&#39;</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;playerID&#39;</span><span class="p">])</span>
 <span class="n">dfMaster</span> <span class="o">=</span> <span class="bp">None</span>
-<span class="n">dfROTYwinners</span>
+<span class="n">dfROTYwinners</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -335,7 +338,7 @@ dtype: int64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[114]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -346,35 +349,8 @@ dtype: int64</pre>
       <th>playerID</th>
       <th>yearID</th>
       <th>lgID</th>
-      <th>nameFirst_x</th>
-      <th>nameLast_x</th>
-      <th>nameGiven_x</th>
-      <th>debut_x</th>
-      <th>finalGame_x</th>
-      <th>birthYear_x</th>
-      <th>birthMonth_x</th>
-      <th>birthDay_x</th>
-      <th>birthCountry_x</th>
-      <th>weight_x</th>
-      <th>height_x</th>
-      <th>bats_x</th>
-      <th>throws_x</th>
-      <th>nameFirst_y</th>
-      <th>nameLast_y</th>
-      <th>nameGiven_y</th>
-      <th>debut_y</th>
-      <th>finalGame_y</th>
-      <th>birthYear_y</th>
-      <th>birthMonth_y</th>
-      <th>birthDay_y</th>
-      <th>birthCountry_y</th>
-      <th>weight_y</th>
-      <th>height_y</th>
-      <th>bats_y</th>
-      <th>throws_y</th>
       <th>nameFirst</th>
       <th>nameLast</th>
-      <th>nameGiven</th>
       <th>debut</th>
       <th>finalGame</th>
       <th>birthYear</th>
@@ -395,33 +371,6 @@ dtype: int64</pre>
       <td>ML</td>
       <td>Jackie</td>
       <td>Robinson</td>
-      <td>Jack Roosevelt</td>
-      <td>4/15/1947</td>
-      <td>9/30/1956</td>
-      <td>1919</td>
-      <td>1</td>
-      <td>31</td>
-      <td>USA</td>
-      <td>195</td>
-      <td>71</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Jackie</td>
-      <td>Robinson</td>
-      <td>Jack Roosevelt</td>
-      <td>4/15/1947</td>
-      <td>9/30/1956</td>
-      <td>1919</td>
-      <td>1</td>
-      <td>31</td>
-      <td>USA</td>
-      <td>195</td>
-      <td>71</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Jackie</td>
-      <td>Robinson</td>
-      <td>Jack Roosevelt</td>
       <td>4/15/1947</td>
       <td>9/30/1956</td>
       <td>1919</td>
@@ -440,33 +389,6 @@ dtype: int64</pre>
       <td>ML</td>
       <td>Al</td>
       <td>Dark</td>
-      <td>Alvin Ralph</td>
-      <td>7/14/1946</td>
-      <td>10/2/1960</td>
-      <td>1922</td>
-      <td>1</td>
-      <td>7</td>
-      <td>USA</td>
-      <td>185</td>
-      <td>71</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Al</td>
-      <td>Dark</td>
-      <td>Alvin Ralph</td>
-      <td>7/14/1946</td>
-      <td>10/2/1960</td>
-      <td>1922</td>
-      <td>1</td>
-      <td>7</td>
-      <td>USA</td>
-      <td>185</td>
-      <td>71</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Al</td>
-      <td>Dark</td>
-      <td>Alvin Ralph</td>
       <td>7/14/1946</td>
       <td>10/2/1960</td>
       <td>1922</td>
@@ -485,33 +407,6 @@ dtype: int64</pre>
       <td>AL</td>
       <td>Roy</td>
       <td>Sievers</td>
-      <td>Roy Edward</td>
-      <td>4/21/1949</td>
-      <td>5/9/1965</td>
-      <td>1926</td>
-      <td>11</td>
-      <td>18</td>
-      <td>USA</td>
-      <td>195</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Roy</td>
-      <td>Sievers</td>
-      <td>Roy Edward</td>
-      <td>4/21/1949</td>
-      <td>5/9/1965</td>
-      <td>1926</td>
-      <td>11</td>
-      <td>18</td>
-      <td>USA</td>
-      <td>195</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Roy</td>
-      <td>Sievers</td>
-      <td>Roy Edward</td>
       <td>4/21/1949</td>
       <td>5/9/1965</td>
       <td>1926</td>
@@ -530,33 +425,6 @@ dtype: int64</pre>
       <td>NL</td>
       <td>Don</td>
       <td>Newcombe</td>
-      <td>Donald</td>
-      <td>5/20/1949</td>
-      <td>10/1/1960</td>
-      <td>1926</td>
-      <td>6</td>
-      <td>14</td>
-      <td>USA</td>
-      <td>220</td>
-      <td>76</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Don</td>
-      <td>Newcombe</td>
-      <td>Donald</td>
-      <td>5/20/1949</td>
-      <td>10/1/1960</td>
-      <td>1926</td>
-      <td>6</td>
-      <td>14</td>
-      <td>USA</td>
-      <td>220</td>
-      <td>76</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Don</td>
-      <td>Newcombe</td>
-      <td>Donald</td>
       <td>5/20/1949</td>
       <td>10/1/1960</td>
       <td>1926</td>
@@ -575,33 +443,6 @@ dtype: int64</pre>
       <td>AL</td>
       <td>Walt</td>
       <td>Dropo</td>
-      <td>Walter</td>
-      <td>4/19/1949</td>
-      <td>5/17/1961</td>
-      <td>1923</td>
-      <td>1</td>
-      <td>30</td>
-      <td>USA</td>
-      <td>220</td>
-      <td>77</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Walt</td>
-      <td>Dropo</td>
-      <td>Walter</td>
-      <td>4/19/1949</td>
-      <td>5/17/1961</td>
-      <td>1923</td>
-      <td>1</td>
-      <td>30</td>
-      <td>USA</td>
-      <td>220</td>
-      <td>77</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Walt</td>
-      <td>Dropo</td>
-      <td>Walter</td>
       <td>4/19/1949</td>
       <td>5/17/1961</td>
       <td>1923</td>
@@ -613,2301 +454,59 @@ dtype: int64</pre>
       <td>R</td>
       <td>R</td>
     </tr>
-    <tr>
-      <th>5</th>
-      <td>jethrsa01</td>
-      <td>1950</td>
-      <td>NL</td>
-      <td>Sam</td>
-      <td>Jethroe</td>
-      <td>Samuel</td>
-      <td>4/18/1950</td>
-      <td>4/15/1954</td>
-      <td>1917</td>
-      <td>1</td>
-      <td>23</td>
-      <td>USA</td>
-      <td>178</td>
-      <td>73</td>
-      <td>B</td>
-      <td>R</td>
-      <td>Sam</td>
-      <td>Jethroe</td>
-      <td>Samuel</td>
-      <td>4/18/1950</td>
-      <td>4/15/1954</td>
-      <td>1917</td>
-      <td>1</td>
-      <td>23</td>
-      <td>USA</td>
-      <td>178</td>
-      <td>73</td>
-      <td>B</td>
-      <td>R</td>
-      <td>Sam</td>
-      <td>Jethroe</td>
-      <td>Samuel</td>
-      <td>4/18/1950</td>
-      <td>4/15/1954</td>
-      <td>1917</td>
-      <td>1</td>
-      <td>23</td>
-      <td>USA</td>
-      <td>178</td>
-      <td>73</td>
-      <td>B</td>
-      <td>R</td>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">dfROTYwinners</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>playerID</th>
+      <th>yearID</th>
+      <th>lgID</th>
+      <th>nameFirst</th>
+      <th>nameLast</th>
+      <th>debut</th>
+      <th>finalGame</th>
+      <th>birthYear</th>
+      <th>birthMonth</th>
+      <th>birthDay</th>
+      <th>birthCountry</th>
+      <th>weight</th>
+      <th>height</th>
+      <th>bats</th>
+      <th>throws</th>
     </tr>
-    <tr>
-      <th>6</th>
-      <td>mcdougi01</td>
-      <td>1951</td>
-      <td>AL</td>
-      <td>Gil</td>
-      <td>McDougald</td>
-      <td>Gilbert James</td>
-      <td>4/20/1951</td>
-      <td>10/2/1960</td>
-      <td>1928</td>
-      <td>5</td>
-      <td>19</td>
-      <td>USA</td>
-      <td>175</td>
-      <td>72</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Gil</td>
-      <td>McDougald</td>
-      <td>Gilbert James</td>
-      <td>4/20/1951</td>
-      <td>10/2/1960</td>
-      <td>1928</td>
-      <td>5</td>
-      <td>19</td>
-      <td>USA</td>
-      <td>175</td>
-      <td>72</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Gil</td>
-      <td>McDougald</td>
-      <td>Gilbert James</td>
-      <td>4/20/1951</td>
-      <td>10/2/1960</td>
-      <td>1928</td>
-      <td>5</td>
-      <td>19</td>
-      <td>USA</td>
-      <td>175</td>
-      <td>72</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>mayswi01</td>
-      <td>1951</td>
-      <td>NL</td>
-      <td>Willie</td>
-      <td>Mays</td>
-      <td>Willie Howard</td>
-      <td>5/25/1951</td>
-      <td>9/9/1973</td>
-      <td>1931</td>
-      <td>5</td>
-      <td>6</td>
-      <td>USA</td>
-      <td>170</td>
-      <td>70</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Willie</td>
-      <td>Mays</td>
-      <td>Willie Howard</td>
-      <td>5/25/1951</td>
-      <td>9/9/1973</td>
-      <td>1931</td>
-      <td>5</td>
-      <td>6</td>
-      <td>USA</td>
-      <td>170</td>
-      <td>70</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Willie</td>
-      <td>Mays</td>
-      <td>Willie Howard</td>
-      <td>5/25/1951</td>
-      <td>9/9/1973</td>
-      <td>1931</td>
-      <td>5</td>
-      <td>6</td>
-      <td>USA</td>
-      <td>170</td>
-      <td>70</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>byrdha01</td>
-      <td>1952</td>
-      <td>AL</td>
-      <td>Harry</td>
-      <td>Byrd</td>
-      <td>Harry Gladwin</td>
-      <td>4/21/1950</td>
-      <td>9/27/1957</td>
-      <td>1925</td>
-      <td>2</td>
-      <td>3</td>
-      <td>USA</td>
-      <td>188</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Harry</td>
-      <td>Byrd</td>
-      <td>Harry Gladwin</td>
-      <td>4/21/1950</td>
-      <td>9/27/1957</td>
-      <td>1925</td>
-      <td>2</td>
-      <td>3</td>
-      <td>USA</td>
-      <td>188</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Harry</td>
-      <td>Byrd</td>
-      <td>Harry Gladwin</td>
-      <td>4/21/1950</td>
-      <td>9/27/1957</td>
-      <td>1925</td>
-      <td>2</td>
-      <td>3</td>
-      <td>USA</td>
-      <td>188</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>blackjo02</td>
-      <td>1952</td>
-      <td>NL</td>
-      <td>Joe</td>
-      <td>Black</td>
-      <td>Joseph</td>
-      <td>5/1/1952</td>
-      <td>9/11/1957</td>
-      <td>1924</td>
-      <td>2</td>
-      <td>8</td>
-      <td>USA</td>
-      <td>220</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Joe</td>
-      <td>Black</td>
-      <td>Joseph</td>
-      <td>5/1/1952</td>
-      <td>9/11/1957</td>
-      <td>1924</td>
-      <td>2</td>
-      <td>8</td>
-      <td>USA</td>
-      <td>220</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Joe</td>
-      <td>Black</td>
-      <td>Joseph</td>
-      <td>5/1/1952</td>
-      <td>9/11/1957</td>
-      <td>1924</td>
-      <td>2</td>
-      <td>8</td>
-      <td>USA</td>
-      <td>220</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>kuennha01</td>
-      <td>1953</td>
-      <td>AL</td>
-      <td>Harvey</td>
-      <td>Kuenn</td>
-      <td>Harvey Edward</td>
-      <td>9/6/1952</td>
-      <td>10/2/1966</td>
-      <td>1930</td>
-      <td>12</td>
-      <td>4</td>
-      <td>USA</td>
-      <td>187</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Harvey</td>
-      <td>Kuenn</td>
-      <td>Harvey Edward</td>
-      <td>9/6/1952</td>
-      <td>10/2/1966</td>
-      <td>1930</td>
-      <td>12</td>
-      <td>4</td>
-      <td>USA</td>
-      <td>187</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Harvey</td>
-      <td>Kuenn</td>
-      <td>Harvey Edward</td>
-      <td>9/6/1952</td>
-      <td>10/2/1966</td>
-      <td>1930</td>
-      <td>12</td>
-      <td>4</td>
-      <td>USA</td>
-      <td>187</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>gilliji01</td>
-      <td>1953</td>
-      <td>NL</td>
-      <td>Jim</td>
-      <td>Gilliam</td>
-      <td>James William</td>
-      <td>4/14/1953</td>
-      <td>9/30/1966</td>
-      <td>1928</td>
-      <td>10</td>
-      <td>17</td>
-      <td>USA</td>
-      <td>175</td>
-      <td>70</td>
-      <td>B</td>
-      <td>R</td>
-      <td>Jim</td>
-      <td>Gilliam</td>
-      <td>James William</td>
-      <td>4/14/1953</td>
-      <td>9/30/1966</td>
-      <td>1928</td>
-      <td>10</td>
-      <td>17</td>
-      <td>USA</td>
-      <td>175</td>
-      <td>70</td>
-      <td>B</td>
-      <td>R</td>
-      <td>Jim</td>
-      <td>Gilliam</td>
-      <td>James William</td>
-      <td>4/14/1953</td>
-      <td>9/30/1966</td>
-      <td>1928</td>
-      <td>10</td>
-      <td>17</td>
-      <td>USA</td>
-      <td>175</td>
-      <td>70</td>
-      <td>B</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>grimbo01</td>
-      <td>1954</td>
-      <td>AL</td>
-      <td>Bob</td>
-      <td>Grim</td>
-      <td>Robert Anton</td>
-      <td>4/18/1954</td>
-      <td>5/24/1962</td>
-      <td>1930</td>
-      <td>3</td>
-      <td>8</td>
-      <td>USA</td>
-      <td>175</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Bob</td>
-      <td>Grim</td>
-      <td>Robert Anton</td>
-      <td>4/18/1954</td>
-      <td>5/24/1962</td>
-      <td>1930</td>
-      <td>3</td>
-      <td>8</td>
-      <td>USA</td>
-      <td>175</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Bob</td>
-      <td>Grim</td>
-      <td>Robert Anton</td>
-      <td>4/18/1954</td>
-      <td>5/24/1962</td>
-      <td>1930</td>
-      <td>3</td>
-      <td>8</td>
-      <td>USA</td>
-      <td>175</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>moonwa01</td>
-      <td>1954</td>
-      <td>NL</td>
-      <td>Wally</td>
-      <td>Moon</td>
-      <td>Wallace Wade</td>
-      <td>4/13/1954</td>
-      <td>9/12/1965</td>
-      <td>1930</td>
-      <td>4</td>
-      <td>3</td>
-      <td>USA</td>
-      <td>169</td>
-      <td>72</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Wally</td>
-      <td>Moon</td>
-      <td>Wallace Wade</td>
-      <td>4/13/1954</td>
-      <td>9/12/1965</td>
-      <td>1930</td>
-      <td>4</td>
-      <td>3</td>
-      <td>USA</td>
-      <td>169</td>
-      <td>72</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Wally</td>
-      <td>Moon</td>
-      <td>Wallace Wade</td>
-      <td>4/13/1954</td>
-      <td>9/12/1965</td>
-      <td>1930</td>
-      <td>4</td>
-      <td>3</td>
-      <td>USA</td>
-      <td>169</td>
-      <td>72</td>
-      <td>L</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>scorehe01</td>
-      <td>1955</td>
-      <td>AL</td>
-      <td>Herb</td>
-      <td>Score</td>
-      <td>Herbert Jude</td>
-      <td>4/15/1955</td>
-      <td>5/4/1962</td>
-      <td>1933</td>
-      <td>6</td>
-      <td>7</td>
-      <td>USA</td>
-      <td>185</td>
-      <td>74</td>
-      <td>L</td>
-      <td>L</td>
-      <td>Herb</td>
-      <td>Score</td>
-      <td>Herbert Jude</td>
-      <td>4/15/1955</td>
-      <td>5/4/1962</td>
-      <td>1933</td>
-      <td>6</td>
-      <td>7</td>
-      <td>USA</td>
-      <td>185</td>
-      <td>74</td>
-      <td>L</td>
-      <td>L</td>
-      <td>Herb</td>
-      <td>Score</td>
-      <td>Herbert Jude</td>
-      <td>4/15/1955</td>
-      <td>5/4/1962</td>
-      <td>1933</td>
-      <td>6</td>
-      <td>7</td>
-      <td>USA</td>
-      <td>185</td>
-      <td>74</td>
-      <td>L</td>
-      <td>L</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>virdobi01</td>
-      <td>1955</td>
-      <td>NL</td>
-      <td>Bill</td>
-      <td>Virdon</td>
-      <td>William Charles</td>
-      <td>4/12/1955</td>
-      <td>7/31/1968</td>
-      <td>1931</td>
-      <td>6</td>
-      <td>9</td>
-      <td>USA</td>
-      <td>175</td>
-      <td>72</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Bill</td>
-      <td>Virdon</td>
-      <td>William Charles</td>
-      <td>4/12/1955</td>
-      <td>7/31/1968</td>
-      <td>1931</td>
-      <td>6</td>
-      <td>9</td>
-      <td>USA</td>
-      <td>175</td>
-      <td>72</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Bill</td>
-      <td>Virdon</td>
-      <td>William Charles</td>
-      <td>4/12/1955</td>
-      <td>7/31/1968</td>
-      <td>1931</td>
-      <td>6</td>
-      <td>9</td>
-      <td>USA</td>
-      <td>175</td>
-      <td>72</td>
-      <td>L</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>aparilu01</td>
-      <td>1956</td>
-      <td>AL</td>
-      <td>Luis</td>
-      <td>Aparicio</td>
-      <td>Luis Ernesto</td>
-      <td>4/17/1956</td>
-      <td>9/28/1973</td>
-      <td>1934</td>
-      <td>4</td>
-      <td>29</td>
-      <td>Venezuela</td>
-      <td>160</td>
-      <td>69</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Luis</td>
-      <td>Aparicio</td>
-      <td>Luis Ernesto</td>
-      <td>4/17/1956</td>
-      <td>9/28/1973</td>
-      <td>1934</td>
-      <td>4</td>
-      <td>29</td>
-      <td>Venezuela</td>
-      <td>160</td>
-      <td>69</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Luis</td>
-      <td>Aparicio</td>
-      <td>Luis Ernesto</td>
-      <td>4/17/1956</td>
-      <td>9/28/1973</td>
-      <td>1934</td>
-      <td>4</td>
-      <td>29</td>
-      <td>Venezuela</td>
-      <td>160</td>
-      <td>69</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>robinfr02</td>
-      <td>1956</td>
-      <td>NL</td>
-      <td>Frank</td>
-      <td>Robinson</td>
-      <td>Frank</td>
-      <td>4/17/1956</td>
-      <td>9/18/1976</td>
-      <td>1935</td>
-      <td>8</td>
-      <td>31</td>
-      <td>USA</td>
-      <td>183</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Frank</td>
-      <td>Robinson</td>
-      <td>Frank</td>
-      <td>4/17/1956</td>
-      <td>9/18/1976</td>
-      <td>1935</td>
-      <td>8</td>
-      <td>31</td>
-      <td>USA</td>
-      <td>183</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Frank</td>
-      <td>Robinson</td>
-      <td>Frank</td>
-      <td>4/17/1956</td>
-      <td>9/18/1976</td>
-      <td>1935</td>
-      <td>8</td>
-      <td>31</td>
-      <td>USA</td>
-      <td>183</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>kubekto01</td>
-      <td>1957</td>
-      <td>AL</td>
-      <td>Tony</td>
-      <td>Kubek</td>
-      <td>Anthony Christopher</td>
-      <td>4/20/1957</td>
-      <td>10/3/1965</td>
-      <td>1935</td>
-      <td>10</td>
-      <td>12</td>
-      <td>USA</td>
-      <td>190</td>
-      <td>75</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Tony</td>
-      <td>Kubek</td>
-      <td>Anthony Christopher</td>
-      <td>4/20/1957</td>
-      <td>10/3/1965</td>
-      <td>1935</td>
-      <td>10</td>
-      <td>12</td>
-      <td>USA</td>
-      <td>190</td>
-      <td>75</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Tony</td>
-      <td>Kubek</td>
-      <td>Anthony Christopher</td>
-      <td>4/20/1957</td>
-      <td>10/3/1965</td>
-      <td>1935</td>
-      <td>10</td>
-      <td>12</td>
-      <td>USA</td>
-      <td>190</td>
-      <td>75</td>
-      <td>L</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>sanfoja02</td>
-      <td>1957</td>
-      <td>NL</td>
-      <td>Jack</td>
-      <td>Sanford</td>
-      <td>John Stanley</td>
-      <td>9/16/1956</td>
-      <td>8/6/1967</td>
-      <td>1929</td>
-      <td>5</td>
-      <td>18</td>
-      <td>USA</td>
-      <td>190</td>
-      <td>72</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Jack</td>
-      <td>Sanford</td>
-      <td>John Stanley</td>
-      <td>9/16/1956</td>
-      <td>8/6/1967</td>
-      <td>1929</td>
-      <td>5</td>
-      <td>18</td>
-      <td>USA</td>
-      <td>190</td>
-      <td>72</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Jack</td>
-      <td>Sanford</td>
-      <td>John Stanley</td>
-      <td>9/16/1956</td>
-      <td>8/6/1967</td>
-      <td>1929</td>
-      <td>5</td>
-      <td>18</td>
-      <td>USA</td>
-      <td>190</td>
-      <td>72</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>pearsal02</td>
-      <td>1958</td>
-      <td>AL</td>
-      <td>Albie</td>
-      <td>Pearson</td>
-      <td>Albert Gregory</td>
-      <td>4/14/1958</td>
-      <td>7/16/1966</td>
-      <td>1934</td>
-      <td>9</td>
-      <td>12</td>
-      <td>USA</td>
-      <td>140</td>
-      <td>65</td>
-      <td>L</td>
-      <td>L</td>
-      <td>Albie</td>
-      <td>Pearson</td>
-      <td>Albert Gregory</td>
-      <td>4/14/1958</td>
-      <td>7/16/1966</td>
-      <td>1934</td>
-      <td>9</td>
-      <td>12</td>
-      <td>USA</td>
-      <td>140</td>
-      <td>65</td>
-      <td>L</td>
-      <td>L</td>
-      <td>Albie</td>
-      <td>Pearson</td>
-      <td>Albert Gregory</td>
-      <td>4/14/1958</td>
-      <td>7/16/1966</td>
-      <td>1934</td>
-      <td>9</td>
-      <td>12</td>
-      <td>USA</td>
-      <td>140</td>
-      <td>65</td>
-      <td>L</td>
-      <td>L</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>cepedor01</td>
-      <td>1958</td>
-      <td>NL</td>
-      <td>Orlando</td>
-      <td>Cepeda</td>
-      <td>Orlando Manuel</td>
-      <td>4/15/1958</td>
-      <td>9/19/1974</td>
-      <td>1937</td>
-      <td>9</td>
-      <td>17</td>
-      <td>P.R.</td>
-      <td>210</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Orlando</td>
-      <td>Cepeda</td>
-      <td>Orlando Manuel</td>
-      <td>4/15/1958</td>
-      <td>9/19/1974</td>
-      <td>1937</td>
-      <td>9</td>
-      <td>17</td>
-      <td>P.R.</td>
-      <td>210</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Orlando</td>
-      <td>Cepeda</td>
-      <td>Orlando Manuel</td>
-      <td>4/15/1958</td>
-      <td>9/19/1974</td>
-      <td>1937</td>
-      <td>9</td>
-      <td>17</td>
-      <td>P.R.</td>
-      <td>210</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>allisbo01</td>
-      <td>1959</td>
-      <td>AL</td>
-      <td>Bob</td>
-      <td>Allison</td>
-      <td>William Robert</td>
-      <td>9/16/1958</td>
-      <td>9/29/1970</td>
-      <td>1934</td>
-      <td>7</td>
-      <td>11</td>
-      <td>USA</td>
-      <td>205</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Bob</td>
-      <td>Allison</td>
-      <td>William Robert</td>
-      <td>9/16/1958</td>
-      <td>9/29/1970</td>
-      <td>1934</td>
-      <td>7</td>
-      <td>11</td>
-      <td>USA</td>
-      <td>205</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Bob</td>
-      <td>Allison</td>
-      <td>William Robert</td>
-      <td>9/16/1958</td>
-      <td>9/29/1970</td>
-      <td>1934</td>
-      <td>7</td>
-      <td>11</td>
-      <td>USA</td>
-      <td>205</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>mccovwi01</td>
-      <td>1959</td>
-      <td>NL</td>
-      <td>Willie</td>
-      <td>McCovey</td>
-      <td>Willie Lee</td>
-      <td>7/30/1959</td>
-      <td>7/6/1980</td>
-      <td>1938</td>
-      <td>1</td>
-      <td>10</td>
-      <td>USA</td>
-      <td>198</td>
-      <td>76</td>
-      <td>L</td>
-      <td>L</td>
-      <td>Willie</td>
-      <td>McCovey</td>
-      <td>Willie Lee</td>
-      <td>7/30/1959</td>
-      <td>7/6/1980</td>
-      <td>1938</td>
-      <td>1</td>
-      <td>10</td>
-      <td>USA</td>
-      <td>198</td>
-      <td>76</td>
-      <td>L</td>
-      <td>L</td>
-      <td>Willie</td>
-      <td>McCovey</td>
-      <td>Willie Lee</td>
-      <td>7/30/1959</td>
-      <td>7/6/1980</td>
-      <td>1938</td>
-      <td>1</td>
-      <td>10</td>
-      <td>USA</td>
-      <td>198</td>
-      <td>76</td>
-      <td>L</td>
-      <td>L</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>hansero02</td>
-      <td>1960</td>
-      <td>AL</td>
-      <td>Ron</td>
-      <td>Hansen</td>
-      <td>Ronald Lavern</td>
-      <td>4/15/1958</td>
-      <td>6/20/1972</td>
-      <td>1938</td>
-      <td>4</td>
-      <td>5</td>
-      <td>USA</td>
-      <td>190</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Ron</td>
-      <td>Hansen</td>
-      <td>Ronald Lavern</td>
-      <td>4/15/1958</td>
-      <td>6/20/1972</td>
-      <td>1938</td>
-      <td>4</td>
-      <td>5</td>
-      <td>USA</td>
-      <td>190</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Ron</td>
-      <td>Hansen</td>
-      <td>Ronald Lavern</td>
-      <td>4/15/1958</td>
-      <td>6/20/1972</td>
-      <td>1938</td>
-      <td>4</td>
-      <td>5</td>
-      <td>USA</td>
-      <td>190</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>howarfr01</td>
-      <td>1960</td>
-      <td>NL</td>
-      <td>Frank</td>
-      <td>Howard</td>
-      <td>Frank Oliver</td>
-      <td>9/10/1958</td>
-      <td>9/30/1973</td>
-      <td>1936</td>
-      <td>8</td>
-      <td>8</td>
-      <td>USA</td>
-      <td>255</td>
-      <td>79</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Frank</td>
-      <td>Howard</td>
-      <td>Frank Oliver</td>
-      <td>9/10/1958</td>
-      <td>9/30/1973</td>
-      <td>1936</td>
-      <td>8</td>
-      <td>8</td>
-      <td>USA</td>
-      <td>255</td>
-      <td>79</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Frank</td>
-      <td>Howard</td>
-      <td>Frank Oliver</td>
-      <td>9/10/1958</td>
-      <td>9/30/1973</td>
-      <td>1936</td>
-      <td>8</td>
-      <td>8</td>
-      <td>USA</td>
-      <td>255</td>
-      <td>79</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>schwado01</td>
-      <td>1961</td>
-      <td>AL</td>
-      <td>Don</td>
-      <td>Schwall</td>
-      <td>Donald Bernard</td>
-      <td>5/21/1961</td>
-      <td>4/12/1967</td>
-      <td>1936</td>
-      <td>3</td>
-      <td>2</td>
-      <td>USA</td>
-      <td>200</td>
-      <td>78</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Don</td>
-      <td>Schwall</td>
-      <td>Donald Bernard</td>
-      <td>5/21/1961</td>
-      <td>4/12/1967</td>
-      <td>1936</td>
-      <td>3</td>
-      <td>2</td>
-      <td>USA</td>
-      <td>200</td>
-      <td>78</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Don</td>
-      <td>Schwall</td>
-      <td>Donald Bernard</td>
-      <td>5/21/1961</td>
-      <td>4/12/1967</td>
-      <td>1936</td>
-      <td>3</td>
-      <td>2</td>
-      <td>USA</td>
-      <td>200</td>
-      <td>78</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>willibi01</td>
-      <td>1961</td>
-      <td>NL</td>
-      <td>Billy</td>
-      <td>Williams</td>
-      <td>Billy Leo</td>
-      <td>8/6/1959</td>
-      <td>10/2/1976</td>
-      <td>1938</td>
-      <td>6</td>
-      <td>15</td>
-      <td>USA</td>
-      <td>175</td>
-      <td>73</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Billy</td>
-      <td>Williams</td>
-      <td>Billy Leo</td>
-      <td>8/6/1959</td>
-      <td>10/2/1976</td>
-      <td>1938</td>
-      <td>6</td>
-      <td>15</td>
-      <td>USA</td>
-      <td>175</td>
-      <td>73</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Billy</td>
-      <td>Williams</td>
-      <td>Billy Leo</td>
-      <td>8/6/1959</td>
-      <td>10/2/1976</td>
-      <td>1938</td>
-      <td>6</td>
-      <td>15</td>
-      <td>USA</td>
-      <td>175</td>
-      <td>73</td>
-      <td>L</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>treshto01</td>
-      <td>1962</td>
-      <td>AL</td>
-      <td>Tom</td>
-      <td>Tresh</td>
-      <td>Thomas Michael</td>
-      <td>9/3/1961</td>
-      <td>9/29/1969</td>
-      <td>1938</td>
-      <td>9</td>
-      <td>20</td>
-      <td>USA</td>
-      <td>180</td>
-      <td>73</td>
-      <td>B</td>
-      <td>R</td>
-      <td>Tom</td>
-      <td>Tresh</td>
-      <td>Thomas Michael</td>
-      <td>9/3/1961</td>
-      <td>9/29/1969</td>
-      <td>1938</td>
-      <td>9</td>
-      <td>20</td>
-      <td>USA</td>
-      <td>180</td>
-      <td>73</td>
-      <td>B</td>
-      <td>R</td>
-      <td>Tom</td>
-      <td>Tresh</td>
-      <td>Thomas Michael</td>
-      <td>9/3/1961</td>
-      <td>9/29/1969</td>
-      <td>1938</td>
-      <td>9</td>
-      <td>20</td>
-      <td>USA</td>
-      <td>180</td>
-      <td>73</td>
-      <td>B</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>hubbske01</td>
-      <td>1962</td>
-      <td>NL</td>
-      <td>Ken</td>
-      <td>Hubbs</td>
-      <td>Kenneth Douglass</td>
-      <td>9/10/1961</td>
-      <td>9/29/1963</td>
-      <td>1941</td>
-      <td>12</td>
-      <td>23</td>
-      <td>USA</td>
-      <td>175</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Ken</td>
-      <td>Hubbs</td>
-      <td>Kenneth Douglass</td>
-      <td>9/10/1961</td>
-      <td>9/29/1963</td>
-      <td>1941</td>
-      <td>12</td>
-      <td>23</td>
-      <td>USA</td>
-      <td>175</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Ken</td>
-      <td>Hubbs</td>
-      <td>Kenneth Douglass</td>
-      <td>9/10/1961</td>
-      <td>9/29/1963</td>
-      <td>1941</td>
-      <td>12</td>
-      <td>23</td>
-      <td>USA</td>
-      <td>175</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>106</th>
-      <td>sasakka01</td>
-      <td>2000</td>
-      <td>AL</td>
-      <td>Kazuhiro</td>
-      <td>Sasaki</td>
-      <td>Kazuhiro</td>
-      <td>4/5/2000</td>
-      <td>9/28/2003</td>
-      <td>1968</td>
-      <td>2</td>
-      <td>22</td>
-      <td>Japan</td>
-      <td>209</td>
-      <td>76</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Kazuhiro</td>
-      <td>Sasaki</td>
-      <td>Kazuhiro</td>
-      <td>4/5/2000</td>
-      <td>9/28/2003</td>
-      <td>1968</td>
-      <td>2</td>
-      <td>22</td>
-      <td>Japan</td>
-      <td>209</td>
-      <td>76</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Kazuhiro</td>
-      <td>Sasaki</td>
-      <td>Kazuhiro</td>
-      <td>4/5/2000</td>
-      <td>9/28/2003</td>
-      <td>1968</td>
-      <td>2</td>
-      <td>22</td>
-      <td>Japan</td>
-      <td>209</td>
-      <td>76</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>107</th>
-      <td>furcara01</td>
-      <td>2000</td>
-      <td>NL</td>
-      <td>Rafael</td>
-      <td>Furcal</td>
-      <td>Rafael</td>
-      <td>4/4/2000</td>
-      <td>6/21/2014</td>
-      <td>1977</td>
-      <td>10</td>
-      <td>24</td>
-      <td>D.R.</td>
-      <td>195</td>
-      <td>68</td>
-      <td>B</td>
-      <td>R</td>
-      <td>Rafael</td>
-      <td>Furcal</td>
-      <td>Rafael</td>
-      <td>4/4/2000</td>
-      <td>6/21/2014</td>
-      <td>1977</td>
-      <td>10</td>
-      <td>24</td>
-      <td>D.R.</td>
-      <td>195</td>
-      <td>68</td>
-      <td>B</td>
-      <td>R</td>
-      <td>Rafael</td>
-      <td>Furcal</td>
-      <td>Rafael</td>
-      <td>4/4/2000</td>
-      <td>6/21/2014</td>
-      <td>1977</td>
-      <td>10</td>
-      <td>24</td>
-      <td>D.R.</td>
-      <td>195</td>
-      <td>68</td>
-      <td>B</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>108</th>
-      <td>suzukic01</td>
-      <td>2001</td>
-      <td>AL</td>
-      <td>Ichiro</td>
-      <td>Suzuki</td>
-      <td>Ichiro</td>
-      <td>4/2/2001</td>
-      <td>9/28/2014</td>
-      <td>1973</td>
-      <td>10</td>
-      <td>22</td>
-      <td>Japan</td>
-      <td>170</td>
-      <td>71</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Ichiro</td>
-      <td>Suzuki</td>
-      <td>Ichiro</td>
-      <td>4/2/2001</td>
-      <td>9/28/2014</td>
-      <td>1973</td>
-      <td>10</td>
-      <td>22</td>
-      <td>Japan</td>
-      <td>170</td>
-      <td>71</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Ichiro</td>
-      <td>Suzuki</td>
-      <td>Ichiro</td>
-      <td>4/2/2001</td>
-      <td>9/28/2014</td>
-      <td>1973</td>
-      <td>10</td>
-      <td>22</td>
-      <td>Japan</td>
-      <td>170</td>
-      <td>71</td>
-      <td>L</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>109</th>
-      <td>pujolal01</td>
-      <td>2001</td>
-      <td>NL</td>
-      <td>Albert</td>
-      <td>Pujols</td>
-      <td>Jose Alberto</td>
-      <td>4/2/2001</td>
-      <td>9/28/2014</td>
-      <td>1980</td>
-      <td>1</td>
-      <td>16</td>
-      <td>D.R.</td>
-      <td>230</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Albert</td>
-      <td>Pujols</td>
-      <td>Jose Alberto</td>
-      <td>4/2/2001</td>
-      <td>9/28/2014</td>
-      <td>1980</td>
-      <td>1</td>
-      <td>16</td>
-      <td>D.R.</td>
-      <td>230</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Albert</td>
-      <td>Pujols</td>
-      <td>Jose Alberto</td>
-      <td>4/2/2001</td>
-      <td>9/28/2014</td>
-      <td>1980</td>
-      <td>1</td>
-      <td>16</td>
-      <td>D.R.</td>
-      <td>230</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>110</th>
-      <td>hinsker01</td>
-      <td>2002</td>
-      <td>AL</td>
-      <td>Eric</td>
-      <td>Hinske</td>
-      <td>Eric Scott</td>
-      <td>4/1/2002</td>
-      <td>6/27/2013</td>
-      <td>1977</td>
-      <td>8</td>
-      <td>5</td>
-      <td>USA</td>
-      <td>235</td>
-      <td>74</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Eric</td>
-      <td>Hinske</td>
-      <td>Eric Scott</td>
-      <td>4/1/2002</td>
-      <td>6/27/2013</td>
-      <td>1977</td>
-      <td>8</td>
-      <td>5</td>
-      <td>USA</td>
-      <td>235</td>
-      <td>74</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Eric</td>
-      <td>Hinske</td>
-      <td>Eric Scott</td>
-      <td>4/1/2002</td>
-      <td>6/27/2013</td>
-      <td>1977</td>
-      <td>8</td>
-      <td>5</td>
-      <td>USA</td>
-      <td>235</td>
-      <td>74</td>
-      <td>L</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>111</th>
-      <td>jennija01</td>
-      <td>2002</td>
-      <td>NL</td>
-      <td>Jason</td>
-      <td>Jennings</td>
-      <td>Jason Ryan</td>
-      <td>8/23/2001</td>
-      <td>8/26/2009</td>
-      <td>1978</td>
-      <td>7</td>
-      <td>17</td>
-      <td>USA</td>
-      <td>235</td>
-      <td>74</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Jason</td>
-      <td>Jennings</td>
-      <td>Jason Ryan</td>
-      <td>8/23/2001</td>
-      <td>8/26/2009</td>
-      <td>1978</td>
-      <td>7</td>
-      <td>17</td>
-      <td>USA</td>
-      <td>235</td>
-      <td>74</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Jason</td>
-      <td>Jennings</td>
-      <td>Jason Ryan</td>
-      <td>8/23/2001</td>
-      <td>8/26/2009</td>
-      <td>1978</td>
-      <td>7</td>
-      <td>17</td>
-      <td>USA</td>
-      <td>235</td>
-      <td>74</td>
-      <td>L</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>112</th>
-      <td>berroan01</td>
-      <td>2003</td>
-      <td>AL</td>
-      <td>Angel</td>
-      <td>Berroa</td>
-      <td>Angel Maria</td>
-      <td>9/18/2001</td>
-      <td>8/6/2009</td>
-      <td>1978</td>
-      <td>1</td>
-      <td>27</td>
-      <td>D.R.</td>
-      <td>195</td>
-      <td>72</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Angel</td>
-      <td>Berroa</td>
-      <td>Angel Maria</td>
-      <td>9/18/2001</td>
-      <td>8/6/2009</td>
-      <td>1978</td>
-      <td>1</td>
-      <td>27</td>
-      <td>D.R.</td>
-      <td>195</td>
-      <td>72</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Angel</td>
-      <td>Berroa</td>
-      <td>Angel Maria</td>
-      <td>9/18/2001</td>
-      <td>8/6/2009</td>
-      <td>1978</td>
-      <td>1</td>
-      <td>27</td>
-      <td>D.R.</td>
-      <td>195</td>
-      <td>72</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>113</th>
-      <td>willido03</td>
-      <td>2003</td>
-      <td>NL</td>
-      <td>Dontrelle</td>
-      <td>Willis</td>
-      <td>Dontrelle Wayne</td>
-      <td>5/9/2003</td>
-      <td>9/27/2011</td>
-      <td>1982</td>
-      <td>1</td>
-      <td>12</td>
-      <td>USA</td>
-      <td>225</td>
-      <td>76</td>
-      <td>L</td>
-      <td>L</td>
-      <td>Dontrelle</td>
-      <td>Willis</td>
-      <td>Dontrelle Wayne</td>
-      <td>5/9/2003</td>
-      <td>9/27/2011</td>
-      <td>1982</td>
-      <td>1</td>
-      <td>12</td>
-      <td>USA</td>
-      <td>225</td>
-      <td>76</td>
-      <td>L</td>
-      <td>L</td>
-      <td>Dontrelle</td>
-      <td>Willis</td>
-      <td>Dontrelle Wayne</td>
-      <td>5/9/2003</td>
-      <td>9/27/2011</td>
-      <td>1982</td>
-      <td>1</td>
-      <td>12</td>
-      <td>USA</td>
-      <td>225</td>
-      <td>76</td>
-      <td>L</td>
-      <td>L</td>
-    </tr>
-    <tr>
-      <th>114</th>
-      <td>crosbbo01</td>
-      <td>2004</td>
-      <td>AL</td>
-      <td>Bobby</td>
-      <td>Crosby</td>
-      <td>Robert Edward</td>
-      <td>9/2/2003</td>
-      <td>8/21/2010</td>
-      <td>1980</td>
-      <td>1</td>
-      <td>12</td>
-      <td>USA</td>
-      <td>210</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Bobby</td>
-      <td>Crosby</td>
-      <td>Robert Edward</td>
-      <td>9/2/2003</td>
-      <td>8/21/2010</td>
-      <td>1980</td>
-      <td>1</td>
-      <td>12</td>
-      <td>USA</td>
-      <td>210</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Bobby</td>
-      <td>Crosby</td>
-      <td>Robert Edward</td>
-      <td>9/2/2003</td>
-      <td>8/21/2010</td>
-      <td>1980</td>
-      <td>1</td>
-      <td>12</td>
-      <td>USA</td>
-      <td>210</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>115</th>
-      <td>bayja01</td>
-      <td>2004</td>
-      <td>NL</td>
-      <td>Jason</td>
-      <td>Bay</td>
-      <td>Jason Raymond</td>
-      <td>5/23/2003</td>
-      <td>7/26/2013</td>
-      <td>1978</td>
-      <td>9</td>
-      <td>20</td>
-      <td>CAN</td>
-      <td>210</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Jason</td>
-      <td>Bay</td>
-      <td>Jason Raymond</td>
-      <td>5/23/2003</td>
-      <td>7/26/2013</td>
-      <td>1978</td>
-      <td>9</td>
-      <td>20</td>
-      <td>CAN</td>
-      <td>210</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Jason</td>
-      <td>Bay</td>
-      <td>Jason Raymond</td>
-      <td>5/23/2003</td>
-      <td>7/26/2013</td>
-      <td>1978</td>
-      <td>9</td>
-      <td>20</td>
-      <td>CAN</td>
-      <td>210</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>116</th>
-      <td>streehu01</td>
-      <td>2005</td>
-      <td>AL</td>
-      <td>Huston</td>
-      <td>Street</td>
-      <td>Huston Lowell</td>
-      <td>4/6/2005</td>
-      <td>9/24/2014</td>
-      <td>1983</td>
-      <td>8</td>
-      <td>2</td>
-      <td>USA</td>
-      <td>195</td>
-      <td>72</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Huston</td>
-      <td>Street</td>
-      <td>Huston Lowell</td>
-      <td>4/6/2005</td>
-      <td>9/24/2014</td>
-      <td>1983</td>
-      <td>8</td>
-      <td>2</td>
-      <td>USA</td>
-      <td>195</td>
-      <td>72</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Huston</td>
-      <td>Street</td>
-      <td>Huston Lowell</td>
-      <td>4/6/2005</td>
-      <td>9/24/2014</td>
-      <td>1983</td>
-      <td>8</td>
-      <td>2</td>
-      <td>USA</td>
-      <td>195</td>
-      <td>72</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>117</th>
-      <td>howarry01</td>
-      <td>2005</td>
-      <td>NL</td>
-      <td>Ryan</td>
-      <td>Howard</td>
-      <td>Ryan James</td>
-      <td>9/1/2004</td>
-      <td>9/28/2014</td>
-      <td>1979</td>
-      <td>11</td>
-      <td>19</td>
-      <td>USA</td>
-      <td>250</td>
-      <td>76</td>
-      <td>L</td>
-      <td>L</td>
-      <td>Ryan</td>
-      <td>Howard</td>
-      <td>Ryan James</td>
-      <td>9/1/2004</td>
-      <td>9/28/2014</td>
-      <td>1979</td>
-      <td>11</td>
-      <td>19</td>
-      <td>USA</td>
-      <td>250</td>
-      <td>76</td>
-      <td>L</td>
-      <td>L</td>
-      <td>Ryan</td>
-      <td>Howard</td>
-      <td>Ryan James</td>
-      <td>9/1/2004</td>
-      <td>9/28/2014</td>
-      <td>1979</td>
-      <td>11</td>
-      <td>19</td>
-      <td>USA</td>
-      <td>250</td>
-      <td>76</td>
-      <td>L</td>
-      <td>L</td>
-    </tr>
-    <tr>
-      <th>118</th>
-      <td>verlaju01</td>
-      <td>2006</td>
-      <td>AL</td>
-      <td>Justin</td>
-      <td>Verlander</td>
-      <td>Justin Brooks</td>
-      <td>7/4/2005</td>
-      <td>9/24/2014</td>
-      <td>1983</td>
-      <td>2</td>
-      <td>20</td>
-      <td>USA</td>
-      <td>225</td>
-      <td>77</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Justin</td>
-      <td>Verlander</td>
-      <td>Justin Brooks</td>
-      <td>7/4/2005</td>
-      <td>9/24/2014</td>
-      <td>1983</td>
-      <td>2</td>
-      <td>20</td>
-      <td>USA</td>
-      <td>225</td>
-      <td>77</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Justin</td>
-      <td>Verlander</td>
-      <td>Justin Brooks</td>
-      <td>7/4/2005</td>
-      <td>9/24/2014</td>
-      <td>1983</td>
-      <td>2</td>
-      <td>20</td>
-      <td>USA</td>
-      <td>225</td>
-      <td>77</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>119</th>
-      <td>ramirha01</td>
-      <td>2006</td>
-      <td>NL</td>
-      <td>Hanley</td>
-      <td>Ramirez</td>
-      <td>Hanley</td>
-      <td>9/20/2005</td>
-      <td>9/27/2014</td>
-      <td>1983</td>
-      <td>12</td>
-      <td>23</td>
-      <td>D.R.</td>
-      <td>225</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Hanley</td>
-      <td>Ramirez</td>
-      <td>Hanley</td>
-      <td>9/20/2005</td>
-      <td>9/27/2014</td>
-      <td>1983</td>
-      <td>12</td>
-      <td>23</td>
-      <td>D.R.</td>
-      <td>225</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Hanley</td>
-      <td>Ramirez</td>
-      <td>Hanley</td>
-      <td>9/20/2005</td>
-      <td>9/27/2014</td>
-      <td>1983</td>
-      <td>12</td>
-      <td>23</td>
-      <td>D.R.</td>
-      <td>225</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>120</th>
-      <td>pedrodu01</td>
-      <td>2007</td>
-      <td>AL</td>
-      <td>Dustin</td>
-      <td>Pedroia</td>
-      <td>Dustin Luis</td>
-      <td>8/22/2006</td>
-      <td>9/8/2014</td>
-      <td>1983</td>
-      <td>8</td>
-      <td>17</td>
-      <td>USA</td>
-      <td>165</td>
-      <td>68</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Dustin</td>
-      <td>Pedroia</td>
-      <td>Dustin Luis</td>
-      <td>8/22/2006</td>
-      <td>9/8/2014</td>
-      <td>1983</td>
-      <td>8</td>
-      <td>17</td>
-      <td>USA</td>
-      <td>165</td>
-      <td>68</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Dustin</td>
-      <td>Pedroia</td>
-      <td>Dustin Luis</td>
-      <td>8/22/2006</td>
-      <td>9/8/2014</td>
-      <td>1983</td>
-      <td>8</td>
-      <td>17</td>
-      <td>USA</td>
-      <td>165</td>
-      <td>68</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>121</th>
-      <td>braunry02</td>
-      <td>2007</td>
-      <td>NL</td>
-      <td>Ryan</td>
-      <td>Braun</td>
-      <td>Ryan Joseph</td>
-      <td>5/25/2007</td>
-      <td>9/28/2014</td>
-      <td>1983</td>
-      <td>11</td>
-      <td>17</td>
-      <td>USA</td>
-      <td>200</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Ryan</td>
-      <td>Braun</td>
-      <td>Ryan Joseph</td>
-      <td>5/25/2007</td>
-      <td>9/28/2014</td>
-      <td>1983</td>
-      <td>11</td>
-      <td>17</td>
-      <td>USA</td>
-      <td>200</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Ryan</td>
-      <td>Braun</td>
-      <td>Ryan Joseph</td>
-      <td>5/25/2007</td>
-      <td>9/28/2014</td>
-      <td>1983</td>
-      <td>11</td>
-      <td>17</td>
-      <td>USA</td>
-      <td>200</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>122</th>
-      <td>longoev01</td>
-      <td>2008</td>
-      <td>AL</td>
-      <td>Evan</td>
-      <td>Longoria</td>
-      <td>Evan Michael</td>
-      <td>4/12/2008</td>
-      <td>9/28/2014</td>
-      <td>1985</td>
-      <td>10</td>
-      <td>7</td>
-      <td>USA</td>
-      <td>210</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Evan</td>
-      <td>Longoria</td>
-      <td>Evan Michael</td>
-      <td>4/12/2008</td>
-      <td>9/28/2014</td>
-      <td>1985</td>
-      <td>10</td>
-      <td>7</td>
-      <td>USA</td>
-      <td>210</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Evan</td>
-      <td>Longoria</td>
-      <td>Evan Michael</td>
-      <td>4/12/2008</td>
-      <td>9/28/2014</td>
-      <td>1985</td>
-      <td>10</td>
-      <td>7</td>
-      <td>USA</td>
-      <td>210</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>123</th>
-      <td>sotoge01</td>
-      <td>2008</td>
-      <td>NL</td>
-      <td>Geovany</td>
-      <td>Soto</td>
-      <td>Geovany</td>
-      <td>9/23/2005</td>
-      <td>9/28/2014</td>
-      <td>1983</td>
-      <td>1</td>
-      <td>20</td>
-      <td>P.R.</td>
-      <td>235</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Geovany</td>
-      <td>Soto</td>
-      <td>Geovany</td>
-      <td>9/23/2005</td>
-      <td>9/28/2014</td>
-      <td>1983</td>
-      <td>1</td>
-      <td>20</td>
-      <td>P.R.</td>
-      <td>235</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Geovany</td>
-      <td>Soto</td>
-      <td>Geovany</td>
-      <td>9/23/2005</td>
-      <td>9/28/2014</td>
-      <td>1983</td>
-      <td>1</td>
-      <td>20</td>
-      <td>P.R.</td>
-      <td>235</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>124</th>
-      <td>bailean01</td>
-      <td>2009</td>
-      <td>AL</td>
-      <td>Andrew</td>
-      <td>Bailey</td>
-      <td>Andrew Scott</td>
-      <td>4/6/2009</td>
-      <td>7/12/2013</td>
-      <td>1984</td>
-      <td>5</td>
-      <td>31</td>
-      <td>USA</td>
-      <td>240</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Andrew</td>
-      <td>Bailey</td>
-      <td>Andrew Scott</td>
-      <td>4/6/2009</td>
-      <td>7/12/2013</td>
-      <td>1984</td>
-      <td>5</td>
-      <td>31</td>
-      <td>USA</td>
-      <td>240</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Andrew</td>
-      <td>Bailey</td>
-      <td>Andrew Scott</td>
-      <td>4/6/2009</td>
-      <td>7/12/2013</td>
-      <td>1984</td>
-      <td>5</td>
-      <td>31</td>
-      <td>USA</td>
-      <td>240</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>125</th>
-      <td>coghlch01</td>
-      <td>2009</td>
-      <td>NL</td>
-      <td>Chris</td>
-      <td>Coghlan</td>
-      <td>Christopher B.</td>
-      <td>5/8/2009</td>
-      <td>9/28/2014</td>
-      <td>1985</td>
-      <td>6</td>
-      <td>18</td>
-      <td>USA</td>
-      <td>195</td>
-      <td>72</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Chris</td>
-      <td>Coghlan</td>
-      <td>Christopher B.</td>
-      <td>5/8/2009</td>
-      <td>9/28/2014</td>
-      <td>1985</td>
-      <td>6</td>
-      <td>18</td>
-      <td>USA</td>
-      <td>195</td>
-      <td>72</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Chris</td>
-      <td>Coghlan</td>
-      <td>Christopher B.</td>
-      <td>5/8/2009</td>
-      <td>9/28/2014</td>
-      <td>1985</td>
-      <td>6</td>
-      <td>18</td>
-      <td>USA</td>
-      <td>195</td>
-      <td>72</td>
-      <td>L</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>126</th>
-      <td>felizne01</td>
-      <td>2010</td>
-      <td>AL</td>
-      <td>Neftali</td>
-      <td>Feliz</td>
-      <td>Neftali</td>
-      <td>8/3/2009</td>
-      <td>9/27/2014</td>
-      <td>1988</td>
-      <td>5</td>
-      <td>2</td>
-      <td>D.R.</td>
-      <td>225</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Neftali</td>
-      <td>Feliz</td>
-      <td>Neftali</td>
-      <td>8/3/2009</td>
-      <td>9/27/2014</td>
-      <td>1988</td>
-      <td>5</td>
-      <td>2</td>
-      <td>D.R.</td>
-      <td>225</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Neftali</td>
-      <td>Feliz</td>
-      <td>Neftali</td>
-      <td>8/3/2009</td>
-      <td>9/27/2014</td>
-      <td>1988</td>
-      <td>5</td>
-      <td>2</td>
-      <td>D.R.</td>
-      <td>225</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>127</th>
-      <td>poseybu01</td>
-      <td>2010</td>
-      <td>NL</td>
-      <td>Buster</td>
-      <td>Posey</td>
-      <td>Gerald Dempsey</td>
-      <td>9/11/2009</td>
-      <td>9/28/2014</td>
-      <td>1987</td>
-      <td>3</td>
-      <td>27</td>
-      <td>USA</td>
-      <td>215</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Buster</td>
-      <td>Posey</td>
-      <td>Gerald Dempsey</td>
-      <td>9/11/2009</td>
-      <td>9/28/2014</td>
-      <td>1987</td>
-      <td>3</td>
-      <td>27</td>
-      <td>USA</td>
-      <td>215</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Buster</td>
-      <td>Posey</td>
-      <td>Gerald Dempsey</td>
-      <td>9/11/2009</td>
-      <td>9/28/2014</td>
-      <td>1987</td>
-      <td>3</td>
-      <td>27</td>
-      <td>USA</td>
-      <td>215</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>128</th>
-      <td>hellije01</td>
-      <td>2011</td>
-      <td>AL</td>
-      <td>Jeremy</td>
-      <td>Hellickson</td>
-      <td>Jeremy Robert</td>
-      <td>8/2/2010</td>
-      <td>9/25/2014</td>
-      <td>1987</td>
-      <td>4</td>
-      <td>8</td>
-      <td>USA</td>
-      <td>190</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Jeremy</td>
-      <td>Hellickson</td>
-      <td>Jeremy Robert</td>
-      <td>8/2/2010</td>
-      <td>9/25/2014</td>
-      <td>1987</td>
-      <td>4</td>
-      <td>8</td>
-      <td>USA</td>
-      <td>190</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Jeremy</td>
-      <td>Hellickson</td>
-      <td>Jeremy Robert</td>
-      <td>8/2/2010</td>
-      <td>9/25/2014</td>
-      <td>1987</td>
-      <td>4</td>
-      <td>8</td>
-      <td>USA</td>
-      <td>190</td>
-      <td>73</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>129</th>
-      <td>kimbrcr01</td>
-      <td>2011</td>
-      <td>NL</td>
-      <td>Craig</td>
-      <td>Kimbrel</td>
-      <td>Craig Michael</td>
-      <td>5/7/2010</td>
-      <td>9/28/2014</td>
-      <td>1988</td>
-      <td>5</td>
-      <td>28</td>
-      <td>USA</td>
-      <td>220</td>
-      <td>71</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Craig</td>
-      <td>Kimbrel</td>
-      <td>Craig Michael</td>
-      <td>5/7/2010</td>
-      <td>9/28/2014</td>
-      <td>1988</td>
-      <td>5</td>
-      <td>28</td>
-      <td>USA</td>
-      <td>220</td>
-      <td>71</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Craig</td>
-      <td>Kimbrel</td>
-      <td>Craig Michael</td>
-      <td>5/7/2010</td>
-      <td>9/28/2014</td>
-      <td>1988</td>
-      <td>5</td>
-      <td>28</td>
-      <td>USA</td>
-      <td>220</td>
-      <td>71</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
-    <tr>
-      <th>130</th>
-      <td>troutmi01</td>
-      <td>2012</td>
-      <td>AL</td>
-      <td>Mike</td>
-      <td>Trout</td>
-      <td>Michael Nelson</td>
-      <td>7/8/2011</td>
-      <td>9/28/2014</td>
-      <td>1991</td>
-      <td>8</td>
-      <td>7</td>
-      <td>USA</td>
-      <td>230</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Mike</td>
-      <td>Trout</td>
-      <td>Michael Nelson</td>
-      <td>7/8/2011</td>
-      <td>9/28/2014</td>
-      <td>1991</td>
-      <td>8</td>
-      <td>7</td>
-      <td>USA</td>
-      <td>230</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Mike</td>
-      <td>Trout</td>
-      <td>Michael Nelson</td>
-      <td>7/8/2011</td>
-      <td>9/28/2014</td>
-      <td>1991</td>
-      <td>8</td>
-      <td>7</td>
-      <td>USA</td>
-      <td>230</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-    </tr>
+  </thead>
+  <tbody>
     <tr>
       <th>131</th>
       <td>harpebr03</td>
@@ -2915,33 +514,6 @@ dtype: int64</pre>
       <td>NL</td>
       <td>Bryce</td>
       <td>Harper</td>
-      <td>Bryce Aron Max</td>
-      <td>4/28/2012</td>
-      <td>9/28/2014</td>
-      <td>1992</td>
-      <td>10</td>
-      <td>16</td>
-      <td>USA</td>
-      <td>225</td>
-      <td>75</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Bryce</td>
-      <td>Harper</td>
-      <td>Bryce Aron Max</td>
-      <td>4/28/2012</td>
-      <td>9/28/2014</td>
-      <td>1992</td>
-      <td>10</td>
-      <td>16</td>
-      <td>USA</td>
-      <td>225</td>
-      <td>75</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Bryce</td>
-      <td>Harper</td>
-      <td>Bryce Aron Max</td>
       <td>4/28/2012</td>
       <td>9/28/2014</td>
       <td>1992</td>
@@ -2960,33 +532,6 @@ dtype: int64</pre>
       <td>AL</td>
       <td>Wil</td>
       <td>Myers</td>
-      <td>William Bradford</td>
-      <td>6/18/2013</td>
-      <td>9/28/2014</td>
-      <td>1990</td>
-      <td>12</td>
-      <td>10</td>
-      <td>USA</td>
-      <td>205</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Wil</td>
-      <td>Myers</td>
-      <td>William Bradford</td>
-      <td>6/18/2013</td>
-      <td>9/28/2014</td>
-      <td>1990</td>
-      <td>12</td>
-      <td>10</td>
-      <td>USA</td>
-      <td>205</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Wil</td>
-      <td>Myers</td>
-      <td>William Bradford</td>
       <td>6/18/2013</td>
       <td>9/28/2014</td>
       <td>1990</td>
@@ -3005,33 +550,6 @@ dtype: int64</pre>
       <td>NL</td>
       <td>Jose</td>
       <td>Fernandez</td>
-      <td>Jose D.</td>
-      <td>4/7/2013</td>
-      <td>5/9/2014</td>
-      <td>1992</td>
-      <td>7</td>
-      <td>31</td>
-      <td>Cuba</td>
-      <td>225</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Jose</td>
-      <td>Fernandez</td>
-      <td>Jose D.</td>
-      <td>4/7/2013</td>
-      <td>5/9/2014</td>
-      <td>1992</td>
-      <td>7</td>
-      <td>31</td>
-      <td>Cuba</td>
-      <td>225</td>
-      <td>74</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Jose</td>
-      <td>Fernandez</td>
-      <td>Jose D.</td>
       <td>4/7/2013</td>
       <td>5/9/2014</td>
       <td>1992</td>
@@ -3050,33 +568,6 @@ dtype: int64</pre>
       <td>AL</td>
       <td>Jose</td>
       <td>Abreu</td>
-      <td>Jose Dariel</td>
-      <td>3/31/2014</td>
-      <td>9/27/2014</td>
-      <td>1987</td>
-      <td>1</td>
-      <td>29</td>
-      <td>Cuba</td>
-      <td>255</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Jose</td>
-      <td>Abreu</td>
-      <td>Jose Dariel</td>
-      <td>3/31/2014</td>
-      <td>9/27/2014</td>
-      <td>1987</td>
-      <td>1</td>
-      <td>29</td>
-      <td>Cuba</td>
-      <td>255</td>
-      <td>75</td>
-      <td>R</td>
-      <td>R</td>
-      <td>Jose</td>
-      <td>Abreu</td>
-      <td>Jose Dariel</td>
       <td>3/31/2014</td>
       <td>9/27/2014</td>
       <td>1987</td>
@@ -3095,33 +586,6 @@ dtype: int64</pre>
       <td>NL</td>
       <td>Jacob</td>
       <td>deGrom</td>
-      <td>Jacob Anthony</td>
-      <td>5/15/2014</td>
-      <td>9/21/2014</td>
-      <td>1988</td>
-      <td>6</td>
-      <td>19</td>
-      <td>USA</td>
-      <td>180</td>
-      <td>76</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Jacob</td>
-      <td>deGrom</td>
-      <td>Jacob Anthony</td>
-      <td>5/15/2014</td>
-      <td>9/21/2014</td>
-      <td>1988</td>
-      <td>6</td>
-      <td>19</td>
-      <td>USA</td>
-      <td>180</td>
-      <td>76</td>
-      <td>L</td>
-      <td>R</td>
-      <td>Jacob</td>
-      <td>deGrom</td>
-      <td>Jacob Anthony</td>
       <td>5/15/2014</td>
       <td>9/21/2014</td>
       <td>1988</td>
@@ -3135,7 +599,6 @@ dtype: int64</pre>
     </tr>
   </tbody>
 </table>
-<p>136 rows × 42 columns</p>
 </div>
 </div>
 
@@ -3157,25 +620,26 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[138]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">dfBatting</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">&#39;Batting.csv&#39;</span><span class="p">)</span>
-<span class="n">dfBatting</span> <span class="o">=</span> <span class="n">dfBatting</span><span class="p">[[</span><span class="s">&#39;playerID&#39;</span><span class="p">,</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;G&#39;</span><span class="p">,</span><span class="s">&#39;AB&#39;</span><span class="p">,</span><span class="s">&#39;R&#39;</span><span class="p">,</span><span class="s">&#39;H&#39;</span><span class="p">,</span><span class="s">&#39;2B&#39;</span><span class="p">,</span><span class="s">&#39;3B&#39;</span><span class="p">,</span><span class="s">&#39;HR&#39;</span><span class="p">,</span><span class="s">&#39;RBI&#39;</span><span class="p">,</span><span class="s">&#39;SB&#39;</span><span class="p">,</span><span class="s">&#39;CS&#39;</span><span class="p">,</span><span class="s">&#39;BB&#39;</span><span class="p">,</span><span class="s">&#39;SO&#39;</span><span class="p">,</span><span class="s">&#39;IBB&#39;</span><span class="p">,</span><span class="s">&#39;HBP&#39;</span><span class="p">,</span><span class="s">&#39;GIDP&#39;</span><span class="p">]]</span>
+<span class="n">dfBatting</span> <span class="o">=</span> <span class="n">dfBatting</span><span class="p">[[</span><span class="s">&#39;playerID&#39;</span><span class="p">,</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;lgID&#39;</span><span class="p">,</span><span class="s">&#39;G&#39;</span><span class="p">,</span><span class="s">&#39;AB&#39;</span><span class="p">,</span><span class="s">&#39;R&#39;</span><span class="p">,</span><span class="s">&#39;H&#39;</span><span class="p">,</span><span class="s">&#39;2B&#39;</span><span class="p">,</span><span class="s">&#39;3B&#39;</span><span class="p">,</span><span class="s">&#39;HR&#39;</span><span class="p">,</span><span class="s">&#39;RBI&#39;</span><span class="p">,</span><span class="s">&#39;SB&#39;</span><span class="p">,</span><span class="s">&#39;CS&#39;</span><span class="p">,</span><span class="s">&#39;BB&#39;</span><span class="p">,</span><span class="s">&#39;SO&#39;</span><span class="p">,</span><span class="s">&#39;IBB&#39;</span><span class="p">,</span><span class="s">&#39;HBP&#39;</span><span class="p">,</span><span class="s">&#39;GIDP&#39;</span><span class="p">]]</span>
+<span class="n">dfBatting</span> <span class="o">=</span> <span class="n">dfBatting</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;lgID&#39;</span><span class="p">:</span><span class="s">&#39;battinglgID&#39;</span><span class="p">})</span>
+
+<span class="c">#use a function and df.apply() to create a new &#39;ba&#39; column for 3 decimal placed batting average</span>
+<span class="k">def</span> <span class="nf">round_three</span><span class="p">(</span><span class="n">flt</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">flt</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 
 <span class="c">#add batting average to our batting dataframe</span>
 <span class="n">dfBatting</span><span class="p">[</span><span class="s">&#39;ba&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfBatting</span><span class="p">[</span><span class="s">&#39;H&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">dfBatting</span><span class="p">[</span><span class="s">&#39;AB&#39;</span><span class="p">]</span>
 <span class="n">dfBatting</span><span class="p">[</span><span class="s">&#39;ba&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfBatting</span><span class="p">[</span><span class="s">&#39;ba&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">round_three</span><span class="p">)</span>
 <span class="c">#rearrange columns to place batting average closer to the left</span>
-<span class="n">dfBatting</span> <span class="o">=</span> <span class="n">dfBatting</span><span class="p">[[</span><span class="s">&#39;playerID&#39;</span><span class="p">,</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;G&#39;</span><span class="p">,</span><span class="s">&#39;ba&#39;</span><span class="p">,</span><span class="s">&#39;AB&#39;</span><span class="p">,</span><span class="s">&#39;R&#39;</span><span class="p">,</span><span class="s">&#39;H&#39;</span><span class="p">,</span><span class="s">&#39;2B&#39;</span><span class="p">,</span><span class="s">&#39;3B&#39;</span><span class="p">,</span><span class="s">&#39;HR&#39;</span><span class="p">,</span><span class="s">&#39;RBI&#39;</span><span class="p">,</span><span class="s">&#39;SB&#39;</span><span class="p">,</span><span class="s">&#39;CS&#39;</span><span class="p">,</span><span class="s">&#39;BB&#39;</span><span class="p">,</span><span class="s">&#39;SO&#39;</span><span class="p">,</span><span class="s">&#39;IBB&#39;</span><span class="p">,</span><span class="s">&#39;HBP&#39;</span><span class="p">,</span><span class="s">&#39;GIDP&#39;</span><span class="p">]]</span>
+<span class="n">dfBatting</span> <span class="o">=</span> <span class="n">dfBatting</span><span class="p">[[</span><span class="s">&#39;playerID&#39;</span><span class="p">,</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;G&#39;</span><span class="p">,</span><span class="s">&#39;ba&#39;</span><span class="p">,</span><span class="s">&#39;AB&#39;</span><span class="p">,</span><span class="s">&#39;R&#39;</span><span class="p">,</span><span class="s">&#39;H&#39;</span><span class="p">,</span><span class="s">&#39;2B&#39;</span><span class="p">,</span><span class="s">&#39;3B&#39;</span><span class="p">,</span><span class="s">&#39;HR&#39;</span><span class="p">,</span><span class="s">&#39;RBI&#39;</span><span class="p">,</span><span class="s">&#39;SB&#39;</span><span class="p">,</span><span class="s">&#39;CS&#39;</span><span class="p">,</span><span class="s">&#39;BB&#39;</span><span class="p">,</span><span class="s">&#39;SO&#39;</span><span class="p">,</span><span class="s">&#39;IBB&#39;</span><span class="p">,</span><span class="s">&#39;HBP&#39;</span><span class="p">,</span><span class="s">&#39;GIDP&#39;</span><span class="p">,</span><span class="s">&#39;battinglgID&#39;</span><span class="p">]]</span>
 
 <span class="n">dfROTYwinnersBatting</span> <span class="o">=</span> <span class="n">dfROTYwinners</span><span class="p">[[</span><span class="s">&#39;playerID&#39;</span><span class="p">,</span><span class="s">&#39;nameFirst&#39;</span><span class="p">,</span><span class="s">&#39;nameLast&#39;</span><span class="p">,</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;lgID&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dfBatting</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">&#39;inner&#39;</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;playerID&#39;</span><span class="p">,</span><span class="s">&#39;yearID&#39;</span><span class="p">])</span>
 
 <span class="c">#print dfROTYwinnersBatting.count()</span>
-
-<span class="c">#use a function and df.apply() to create a new &#39;ba&#39; column for 3 decimal placed batting average</span>
-<span class="k">def</span> <span class="nf">round_three</span><span class="p">(</span><span class="n">flt</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">flt</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 
 <span class="n">dfROTYwinnersBatting</span> <span class="o">=</span> <span class="n">dfROTYwinnersBatting</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
@@ -3197,7 +661,7 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[139]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dfROTYwinnersBatting</span><span class="p">[</span><span class="s">&#39;yearID&#39;</span><span class="p">],</span><span class="n">dfROTYwinnersBatting</span><span class="p">[[</span><span class="s">&#39;G&#39;</span><span class="p">,</span><span class="s">&#39;AB&#39;</span><span class="p">]])</span>
@@ -3212,11 +676,11 @@ dtype: int64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[139]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.text.Text at 0x10bd22290&gt;</pre>
+<pre>&lt;matplotlib.text.Text at 0x10c14d590&gt;</pre>
 </div>
 
 </div>
@@ -4234,7 +1698,7 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[140]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">dfPitching</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">&#39;Pitching.csv&#39;</span><span class="p">)</span>
@@ -4242,7 +1706,7 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
 <span class="n">dfROTYwinnersPitching</span> <span class="o">=</span> <span class="n">dfROTYwinners</span><span class="p">[[</span><span class="s">&#39;playerID&#39;</span><span class="p">,</span><span class="s">&#39;nameFirst&#39;</span><span class="p">,</span><span class="s">&#39;nameLast&#39;</span><span class="p">,</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;lgID&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dfPitching</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">&#39;inner&#39;</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;playerID&#39;</span><span class="p">,</span><span class="s">&#39;yearID&#39;</span><span class="p">])</span>
 <span class="n">dfPitching</span> <span class="o">=</span> <span class="bp">None</span>
 <span class="c">#print dfRookiePitching.count()</span>
-<span class="n">dfROTYwinnersPitching</span> <span class="o">=</span> <span class="n">dfROTYwinnersBattingPitchers</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">dfROTYwinnersPitching</span> <span class="o">=</span> <span class="n">dfROTYwinnersPitching</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="c">#dfROTYwinnersPitching</span>
 </pre></div>
 
@@ -4253,7 +1717,7 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[141]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c">#split the batting numbers for the pitchers and the non pitchers</span>
@@ -4270,7 +1734,7 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[142]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">pitcherRowCount</span> <span class="o">=</span> <span class="n">dfROTYwinnersBattingPitchers</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -4293,7 +1757,7 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[142]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -4322,6 +1786,7 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
       <th>IBB</th>
       <th>HBP</th>
       <th>GIDP</th>
+      <th>battinglgID</th>
     </tr>
   </thead>
   <tbody>
@@ -4348,6 +1813,7 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
       <td>0</td>
       <td>1</td>
       <td>0</td>
+      <td>NL</td>
     </tr>
     <tr>
       <th>30</th>
@@ -4372,6 +1838,7 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
       <td>1</td>
       <td>1</td>
       <td>1</td>
+      <td>AL</td>
     </tr>
     <tr>
       <th>69</th>
@@ -4396,6 +1863,7 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>NL</td>
     </tr>
     <tr>
       <th>65</th>
@@ -4420,6 +1888,7 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
       <td>0</td>
       <td>0</td>
       <td>4</td>
+      <td>NL</td>
     </tr>
     <tr>
       <th>113</th>
@@ -4444,6 +1913,7 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>NL</td>
     </tr>
   </tbody>
 </table>
@@ -4458,7 +1928,7 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[143]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">hitterRowCount</span> <span class="o">=</span> <span class="n">dfROTYwinnersBattingHitters</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -4481,7 +1951,7 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[143]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[10]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -4510,6 +1980,7 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
       <th>IBB</th>
       <th>HBP</th>
       <th>GIDP</th>
+      <th>battinglgID</th>
     </tr>
   </thead>
   <tbody>
@@ -4536,6 +2007,7 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
       <td>0</td>
       <td>9</td>
       <td>20</td>
+      <td>AL</td>
     </tr>
     <tr>
       <th>78</th>
@@ -4560,6 +2032,7 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
       <td>1</td>
       <td>8</td>
       <td>12</td>
+      <td>AL</td>
     </tr>
     <tr>
       <th>35</th>
@@ -4584,6 +2057,7 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
       <td>7</td>
       <td>2</td>
       <td>8</td>
+      <td>NL</td>
     </tr>
     <tr>
       <th>82</th>
@@ -4608,6 +2082,7 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
       <td>1</td>
       <td>9</td>
       <td>9</td>
+      <td>AL</td>
     </tr>
     <tr>
       <th>72</th>
@@ -4632,10 +2107,463 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
       <td>8</td>
       <td>8</td>
       <td>10</td>
+      <td>AL</td>
     </tr>
   </tbody>
 </table>
 </div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">batterGamesPlayed</span> <span class="o">=</span> <span class="n">dfROTYwinnersBattingHitters</span><span class="p">[</span><span class="s">&#39;G&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">162</span> <span class="o">*</span> <span class="mi">50</span>
+<span class="n">pitcherGamesPlayed</span> <span class="o">=</span> <span class="n">dfROTYwinnersBattingHitters</span><span class="p">[</span><span class="s">&#39;G&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">162</span> <span class="o">*</span> <span class="mi">50</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">dfROTYwinnersBattingHitters</span><span class="p">[</span><span class="s">&#39;ba&#39;</span><span class="p">],</span><span class="n">dfROTYwinnersBattingHitters</span><span class="p">[</span><span class="s">&#39;AB&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">batterGamesPlayed</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">dfROTYwinnersBattingPitchers</span><span class="p">[</span><span class="s">&#39;ba&#39;</span><span class="p">],</span><span class="n">dfROTYwinnersBattingPitchers</span><span class="p">[</span><span class="s">&#39;AB&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">pitcherGamesPlayed</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[11]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;matplotlib.collections.PathCollection at 0x10aa7c390&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+RK5CYII=
+"
+>
 </div>
 
 </div>
@@ -4656,7 +2584,7 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[144]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="k">print</span> <span class="s">&quot;ROTY At Bats Histogram for Pitchers (Blue) and NonPitchers (Green)&quot;</span>
@@ -4679,11 +2607,11 @@ KJQGgwpvCoVCoVAaDCq8KRQKhUJpMP4/q34NzgFRo9YAAAAASUVORK5CYII=
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[144]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[12]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x10e7ba450&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x10c227390&gt;</pre>
 </div>
 
 </div>
@@ -4823,7 +2751,7 @@ AIBhCGcAAAzz/16OEn3MSnGAAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[145]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="k">print</span> <span class="s">&quot;ROTY Games Batted Histogram for Pitchers (Blue) and NonPitchers (Green)&quot;</span>
@@ -4846,11 +2774,11 @@ AIBhCGcAAAzz/16OEn3MSnGAAAAAAElFTkSuQmCC
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[145]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[13]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x10e15b7d0&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x10b21ab50&gt;</pre>
 </div>
 
 </div>
@@ -4992,7 +2920,7 @@ MOb/AeEulGpa4hgUAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[146]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dfROTYwinnersBattingHitters</span><span class="p">[</span><span class="s">&#39;yearID&#39;</span><span class="p">],</span><span class="n">dfROTYwinnersBattingHitters</span><span class="p">[[</span><span class="s">&#39;G&#39;</span><span class="p">,</span><span class="s">&#39;AB&#39;</span><span class="p">]])</span>
@@ -5007,11 +2935,11 @@ MOb/AeEulGpa4hgUAAAAAElFTkSuQmCC
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[146]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[14]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.text.Text at 0x10eddf9d0&gt;</pre>
+<pre>&lt;matplotlib.text.Text at 0x10abbe410&gt;</pre>
 </div>
 
 </div>
@@ -5759,7 +3687,7 @@ byGEEEJnZPIWQgghdEYmbyGEEEJnZPIWQgghdOY/TqXs9EpCW+YAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[147]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">dfROTYwinnersBattingHitters</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dfROTYwinnersBattingHitters</span><span class="p">[</span><span class="s">&#39;playerID&#39;</span><span class="p">]</span><span class="o">==</span><span class="s">&#39;mccovwi01&#39;</span><span class="p">]</span>
@@ -5773,7 +3701,7 @@ byGEEEJnZPIWQgghdEYmbyGEEEJnZPIWQgghdOY/TqXs9EpCW+YAAAAASUVORK5CYII=
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[147]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[15]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -5802,6 +3730,7 @@ byGEEEJnZPIWQgghdEYmbyGEEEJnZPIWQgghdOY/TqXs9EpCW+YAAAAASUVORK5CYII=
       <th>IBB</th>
       <th>HBP</th>
       <th>GIDP</th>
+      <th>battinglgID</th>
     </tr>
   </thead>
   <tbody>
@@ -5828,6 +3757,7 @@ byGEEEJnZPIWQgghdEYmbyGEEEJnZPIWQgghdOY/TqXs9EpCW+YAAAAASUVORK5CYII=
       <td>1</td>
       <td>4</td>
       <td>7</td>
+      <td>NL</td>
     </tr>
   </tbody>
 </table>
@@ -5854,7 +3784,7 @@ byGEEEJnZPIWQgghdEYmbyGEEEJnZPIWQgghdOY/TqXs9EpCW+YAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[159]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c">#lets look for the first year a player had 130 at bats or more...</span>
@@ -5865,10 +3795,9 @@ byGEEEJnZPIWQgghdEYmbyGEEEJnZPIWQgghdOY/TqXs9EpCW+YAAAAASUVORK5CYII=
 <span class="c">#save the pool of all candidates to a new dataframe that we can begin to filter</span>
 <span class="n">dfBattingCandidates</span> <span class="o">=</span> <span class="n">dfBattingCandidatesAllRookies</span> 
 
-
 <span class="c">#only need to look at years and leagues where the ROTY was awarded to a pitcher</span>
 <span class="n">ROTY_to_pitcher</span> <span class="o">=</span> <span class="n">dfROTYwinnersPitching</span><span class="p">[[</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;lgID&#39;</span><span class="p">]]</span>
-<span class="n">dfBattingCandidates</span> <span class="o">=</span> <span class="n">dfBattingCandidates</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">ROTY_to_pitcher</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">&#39;inner&#39;</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;lgID&#39;</span><span class="p">])</span>
+<span class="n">dfBattingCandidates</span> <span class="o">=</span> <span class="n">dfBattingCandidates</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">ROTY_to_pitcher</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">&#39;inner&#39;</span><span class="p">,</span><span class="n">right_on</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;lgID&#39;</span><span class="p">],</span><span class="n">left_on</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;battinglgID&#39;</span><span class="p">])</span>
 <span class="n">dfBattingCandidates</span><span class="p">[</span><span class="s">&#39;playerID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 </pre></div>
 
@@ -5880,7 +3809,7 @@ byGEEEJnZPIWQgghdEYmbyGEEEJnZPIWQgghdOY/TqXs9EpCW+YAAAAASUVORK5CYII=
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[159]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[16]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -5895,7 +3824,7 @@ byGEEEJnZPIWQgghdEYmbyGEEEJnZPIWQgghdOY/TqXs9EpCW+YAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[160]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="k">def</span> <span class="nf">grp_plot</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
@@ -5911,7 +3840,7 @@ byGEEEJnZPIWQgghdEYmbyGEEEJnZPIWQgghdOY/TqXs9EpCW+YAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[161]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="k">print</span> <span class="s">&quot;candidate rookies: more than 130 at bats in year and league where ROTY was awarded to pitcher&quot;</span>
@@ -6150,7 +4079,7 @@ h5O0AAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[162]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">dfBattingCandidates_100g</span> <span class="o">=</span> <span class="n">dfBattingCandidates</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dfBattingCandidates</span><span class="p">[</span><span class="s">&#39;G&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">100</span><span class="p">]</span>
@@ -6364,7 +4293,7 @@ TkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[163]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">dfBattingCandidates_100g_400ab</span> <span class="o">=</span> <span class="n">dfBattingCandidates_100g</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dfBattingCandidates_100g</span><span class="p">[</span><span class="s">&#39;AB&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">400</span><span class="p">]</span>
@@ -6585,7 +4514,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[164]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="k">print</span> <span class="s">&quot;Actual ROTY winners&quot;</span>
@@ -6607,7 +4536,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[164]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[21]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -6808,7 +4737,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[167]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="k">print</span> <span class="s">&quot;Rookies with 100 games and 400 at bats&quot;</span>
@@ -6830,7 +4759,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[167]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[22]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -6840,6 +4769,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <th></th>
       <th>yearID</th>
       <th>G</th>
+      <th>ba</th>
       <th>AB</th>
       <th>R</th>
       <th>H</th>
@@ -6869,6 +4799,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <td>147.000000</td>
       <td>147.000000</td>
       <td>147.000000</td>
+      <td>147.000000</td>
       <td>145.000000</td>
       <td>147.000000</td>
       <td>147.000000</td>
@@ -6880,6 +4811,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <th>mean</th>
       <td>1983.428571</td>
       <td>138.285714</td>
+      <td>0.265714</td>
       <td>494.993197</td>
       <td>63.857143</td>
       <td>131.632653</td>
@@ -6899,6 +4831,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <th>std</th>
       <td>20.681207</td>
       <td>12.852695</td>
+      <td>0.023845</td>
       <td>60.827681</td>
       <td>15.284516</td>
       <td>20.607912</td>
@@ -6918,6 +4851,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <th>min</th>
       <td>1949.000000</td>
       <td>110.000000</td>
+      <td>0.208000</td>
       <td>402.000000</td>
       <td>30.000000</td>
       <td>86.000000</td>
@@ -6937,6 +4871,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <th>25%</th>
       <td>1965.000000</td>
       <td>129.000000</td>
+      <td>0.250000</td>
       <td>448.000000</td>
       <td>53.500000</td>
       <td>118.000000</td>
@@ -6956,6 +4891,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <th>50%</th>
       <td>1984.000000</td>
       <td>138.000000</td>
+      <td>0.266000</td>
       <td>488.000000</td>
       <td>64.000000</td>
       <td>131.000000</td>
@@ -6975,6 +4911,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <th>75%</th>
       <td>2003.000000</td>
       <td>149.000000</td>
+      <td>0.282000</td>
       <td>532.500000</td>
       <td>72.000000</td>
       <td>143.500000</td>
@@ -6994,6 +4931,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <th>max</th>
       <td>2014.000000</td>
       <td>162.000000</td>
+      <td>0.321000</td>
       <td>701.000000</td>
       <td>108.000000</td>
       <td>191.000000</td>
@@ -7022,7 +4960,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[166]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="k">print</span> <span class="s">&quot;All eligible rookies&quot;</span>
@@ -7044,7 +4982,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[166]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[23]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -7054,6 +4992,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <th></th>
       <th>yearID</th>
       <th>G</th>
+      <th>ba</th>
       <th>AB</th>
       <th>R</th>
       <th>H</th>
@@ -7075,6 +5014,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <th>count</th>
       <td>6248.000000</td>
       <td>6248.000000</td>
+      <td>6243.000000</td>
       <td>6248.000000</td>
       <td>6248.000000</td>
       <td>6248.000000</td>
@@ -7094,6 +5034,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <th>mean</th>
       <td>1950.312740</td>
       <td>86.031210</td>
+      <td>0.251719</td>
       <td>279.089789</td>
       <td>36.017606</td>
       <td>72.381082</td>
@@ -7113,6 +5054,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <th>std</th>
       <td>42.061407</td>
       <td>36.224486</td>
+      <td>0.048746</td>
       <td>140.536105</td>
       <td>22.744276</td>
       <td>41.245104</td>
@@ -7146,11 +5088,13 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <td>0.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>25%</th>
       <td>1913.000000</td>
       <td>59.000000</td>
+      <td>0.228000</td>
       <td>169.000000</td>
       <td>19.000000</td>
       <td>41.000000</td>
@@ -7170,6 +5114,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <th>50%</th>
       <td>1954.000000</td>
       <td>82.000000</td>
+      <td>0.255000</td>
       <td>244.000000</td>
       <td>30.000000</td>
       <td>62.000000</td>
@@ -7189,6 +5134,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <th>75%</th>
       <td>1988.000000</td>
       <td>114.000000</td>
+      <td>0.278000</td>
       <td>374.000000</td>
       <td>48.000000</td>
       <td>98.000000</td>
@@ -7208,6 +5154,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <th>max</th>
       <td>2014.000000</td>
       <td>163.000000</td>
+      <td>1.000000</td>
       <td>701.000000</td>
       <td>165.000000</td>
       <td>242.000000</td>
@@ -7240,22 +5187,23 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Comparing these tables can give a few more ideas on what separates ROTY winners from the pool of all rookies and what filters we can implement on our candidate rookies to better approximate the population of ROTY winners. I have chosen to filter our candidates by batting average (requiring 0.282, which is the 75th percentile of the remaining candidates) and by runs scored (requiring 60 or more, approximately the 50th percentile of the remaining candidates and 25th for actual ROTY winners)</p>
-<p>These last two filters brings us to a final pool of 30 candidates for ROTY snubs across 20 of the 37 pitcher-awarded ROTY seasons.</p>
+<p>These last two filters brings us to a final pool of 30 candidates for ROTY snubs across 20 of the 37 pitcher-awarded ROTY league seasons.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[168]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="n">dfBattingCandidates_Stricter</span> <span class="o">=</span> <span class="n">dfBattingCandidates_Strict</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dfBattingCandidates_Strict</span><span class="p">[</span><span class="s">&#39;ba&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.282</span><span class="p">]</span>
-<span class="n">dfBattingCandidates_Stricter</span> <span class="o">=</span> <span class="n">dfBattingCandidates_Stricter</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dfBattingCandidates_Stricter</span><span class="p">[</span><span class="s">&#39;R&#39;</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">60</span><span class="p">]</span>
+<div class=" highlight hl-ipython2"><pre><span class="n">dfBattingCandidates_100g_400ab_282ba</span> <span class="o">=</span> <span class="n">dfBattingCandidates_100g_400ab</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dfBattingCandidates_100g_400ab</span><span class="p">[</span><span class="s">&#39;ba&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.282</span><span class="p">]</span>
+<span class="n">dfBattingCandidates_100g_400ab_282ba_60r</span> <span class="o">=</span> <span class="n">dfBattingCandidates_100g_400ab_282ba</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dfBattingCandidates_100g_400ab_282ba</span><span class="p">[</span><span class="s">&#39;R&#39;</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">60</span><span class="p">]</span>
+<span class="n">remainingCandidateCount</span> <span class="o">=</span> <span class="n">dfBattingCandidates_100g_400ab_282ba_60r</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="k">print</span> <span class="s">&quot;Rookie players (first season with 130+ at bats in a year and league where ROTY was awarded to a pitcher),&quot;</span>
 <span class="k">print</span> <span class="s">&quot;  who played in more than 100 games, had more than 400 at bats,&quot;</span> 
-<span class="k">print</span> <span class="s">&quot;  held a batting average over 0.282, and scored 60 or more runs: {} candidates&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dfBattingCandidates_Stricter</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">dfBattingCandidates_Stricter</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;  held a batting average over 0.282, and scored 60 or more runs: {} candidates remaining&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">remainingCandidateCount</span><span class="p">)</span>
+<span class="c">#dfBattingCandidates_100g_400ab_282ba_60r.sort_values(&#39;yearID&#39;,ascending=False)</span>
 </pre></div>
 
 </div>
@@ -7270,706 +5218,9 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Rookie players (first season with 130+ at bats in a year and league where ROTY was awarded to a pitcher),
   who played in more than 100 games, had more than 400 at bats,
-  held a batting average over 0.282, and scored 60 or more runs: 30 candidates
+  held a batting average over 0.282, and scored 60 or more runs: 30 candidates remaining
 </pre>
 </div>
-</div>
-
-<div class="output_area"><div class="prompt output_prompt">Out[168]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>playerID</th>
-      <th>yearID</th>
-      <th>lgID</th>
-      <th>G</th>
-      <th>ba</th>
-      <th>AB</th>
-      <th>R</th>
-      <th>H</th>
-      <th>2B</th>
-      <th>3B</th>
-      <th>HR</th>
-      <th>RBI</th>
-      <th>SB</th>
-      <th>CS</th>
-      <th>BB</th>
-      <th>SO</th>
-      <th>IBB</th>
-      <th>HBP</th>
-      <th>GIDP</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>11</th>
-      <td>hosmeer01</td>
-      <td>2011</td>
-      <td>AL</td>
-      <td>128</td>
-      <td>0.293</td>
-      <td>523</td>
-      <td>66</td>
-      <td>153</td>
-      <td>27</td>
-      <td>3</td>
-      <td>19</td>
-      <td>78</td>
-      <td>11</td>
-      <td>5</td>
-      <td>34</td>
-      <td>82</td>
-      <td>7</td>
-      <td>1</td>
-      <td>13</td>
-    </tr>
-    <tr>
-      <th>563</th>
-      <td>jacksau01</td>
-      <td>2010</td>
-      <td>AL</td>
-      <td>151</td>
-      <td>0.293</td>
-      <td>618</td>
-      <td>103</td>
-      <td>181</td>
-      <td>34</td>
-      <td>10</td>
-      <td>4</td>
-      <td>41</td>
-      <td>27</td>
-      <td>6</td>
-      <td>47</td>
-      <td>170</td>
-      <td>4</td>
-      <td>4</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>366</th>
-      <td>markani01</td>
-      <td>2006</td>
-      <td>AL</td>
-      <td>147</td>
-      <td>0.291</td>
-      <td>491</td>
-      <td>72</td>
-      <td>143</td>
-      <td>25</td>
-      <td>2</td>
-      <td>16</td>
-      <td>62</td>
-      <td>2</td>
-      <td>0</td>
-      <td>43</td>
-      <td>72</td>
-      <td>3</td>
-      <td>3</td>
-      <td>15</td>
-    </tr>
-    <tr>
-      <th>364</th>
-      <td>kinslia01</td>
-      <td>2006</td>
-      <td>AL</td>
-      <td>120</td>
-      <td>0.286</td>
-      <td>423</td>
-      <td>65</td>
-      <td>121</td>
-      <td>27</td>
-      <td>1</td>
-      <td>14</td>
-      <td>55</td>
-      <td>11</td>
-      <td>4</td>
-      <td>40</td>
-      <td>64</td>
-      <td>1</td>
-      <td>3</td>
-      <td>12</td>
-    </tr>
-    <tr>
-      <th>362</th>
-      <td>johjike01</td>
-      <td>2006</td>
-      <td>AL</td>
-      <td>144</td>
-      <td>0.291</td>
-      <td>506</td>
-      <td>61</td>
-      <td>147</td>
-      <td>25</td>
-      <td>1</td>
-      <td>18</td>
-      <td>76</td>
-      <td>3</td>
-      <td>1</td>
-      <td>20</td>
-      <td>46</td>
-      <td>1</td>
-      <td>13</td>
-      <td>15</td>
-    </tr>
-    <tr>
-      <th>106</th>
-      <td>brownem01</td>
-      <td>2005</td>
-      <td>AL</td>
-      <td>150</td>
-      <td>0.286</td>
-      <td>545</td>
-      <td>75</td>
-      <td>156</td>
-      <td>31</td>
-      <td>5</td>
-      <td>17</td>
-      <td>86</td>
-      <td>10</td>
-      <td>1</td>
-      <td>48</td>
-      <td>108</td>
-      <td>1</td>
-      <td>8</td>
-      <td>14</td>
-    </tr>
-    <tr>
-      <th>107</th>
-      <td>canoro01</td>
-      <td>2005</td>
-      <td>AL</td>
-      <td>132</td>
-      <td>0.297</td>
-      <td>522</td>
-      <td>78</td>
-      <td>155</td>
-      <td>34</td>
-      <td>4</td>
-      <td>14</td>
-      <td>62</td>
-      <td>1</td>
-      <td>3</td>
-      <td>16</td>
-      <td>68</td>
-      <td>1</td>
-      <td>3</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>119</th>
-      <td>mauerjo01</td>
-      <td>2005</td>
-      <td>AL</td>
-      <td>131</td>
-      <td>0.294</td>
-      <td>489</td>
-      <td>61</td>
-      <td>144</td>
-      <td>26</td>
-      <td>2</td>
-      <td>9</td>
-      <td>55</td>
-      <td>13</td>
-      <td>1</td>
-      <td>61</td>
-      <td>64</td>
-      <td>12</td>
-      <td>1</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>821</th>
-      <td>podsesc01</td>
-      <td>2003</td>
-      <td>NL</td>
-      <td>154</td>
-      <td>0.314</td>
-      <td>558</td>
-      <td>100</td>
-      <td>175</td>
-      <td>29</td>
-      <td>8</td>
-      <td>9</td>
-      <td>58</td>
-      <td>43</td>
-      <td>10</td>
-      <td>56</td>
-      <td>91</td>
-      <td>2</td>
-      <td>4</td>
-      <td>11</td>
-    </tr>
-    <tr>
-      <th>795</th>
-      <td>byrdma01</td>
-      <td>2003</td>
-      <td>NL</td>
-      <td>135</td>
-      <td>0.303</td>
-      <td>495</td>
-      <td>86</td>
-      <td>150</td>
-      <td>28</td>
-      <td>4</td>
-      <td>7</td>
-      <td>45</td>
-      <td>11</td>
-      <td>1</td>
-      <td>44</td>
-      <td>94</td>
-      <td>3</td>
-      <td>7</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>801</th>
-      <td>cintral01</td>
-      <td>2003</td>
-      <td>NL</td>
-      <td>117</td>
-      <td>0.317</td>
-      <td>448</td>
-      <td>70</td>
-      <td>142</td>
-      <td>26</td>
-      <td>6</td>
-      <td>13</td>
-      <td>51</td>
-      <td>2</td>
-      <td>3</td>
-      <td>29</td>
-      <td>33</td>
-      <td>0</td>
-      <td>2</td>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>704</th>
-      <td>longte01</td>
-      <td>2000</td>
-      <td>AL</td>
-      <td>138</td>
-      <td>0.288</td>
-      <td>584</td>
-      <td>104</td>
-      <td>168</td>
-      <td>34</td>
-      <td>4</td>
-      <td>18</td>
-      <td>80</td>
-      <td>5</td>
-      <td>0</td>
-      <td>43</td>
-      <td>77</td>
-      <td>1</td>
-      <td>1</td>
-      <td>18</td>
-    </tr>
-    <tr>
-      <th>713</th>
-      <td>quinnma01</td>
-      <td>2000</td>
-      <td>AL</td>
-      <td>135</td>
-      <td>0.294</td>
-      <td>500</td>
-      <td>76</td>
-      <td>147</td>
-      <td>33</td>
-      <td>2</td>
-      <td>20</td>
-      <td>78</td>
-      <td>5</td>
-      <td>2</td>
-      <td>35</td>
-      <td>91</td>
-      <td>1</td>
-      <td>3</td>
-      <td>11</td>
-    </tr>
-    <tr>
-      <th>155</th>
-      <td>morriwa02</td>
-      <td>1999</td>
-      <td>NL</td>
-      <td>147</td>
-      <td>0.288</td>
-      <td>511</td>
-      <td>65</td>
-      <td>147</td>
-      <td>20</td>
-      <td>3</td>
-      <td>15</td>
-      <td>73</td>
-      <td>3</td>
-      <td>7</td>
-      <td>59</td>
-      <td>88</td>
-      <td>3</td>
-      <td>2</td>
-      <td>12</td>
-    </tr>
-    <tr>
-      <th>136</th>
-      <td>belliro01</td>
-      <td>1999</td>
-      <td>NL</td>
-      <td>124</td>
-      <td>0.295</td>
-      <td>457</td>
-      <td>60</td>
-      <td>135</td>
-      <td>29</td>
-      <td>4</td>
-      <td>8</td>
-      <td>58</td>
-      <td>4</td>
-      <td>5</td>
-      <td>64</td>
-      <td>59</td>
-      <td>0</td>
-      <td>0</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>730</th>
-      <td>heltoto01</td>
-      <td>1998</td>
-      <td>NL</td>
-      <td>152</td>
-      <td>0.315</td>
-      <td>530</td>
-      <td>78</td>
-      <td>167</td>
-      <td>37</td>
-      <td>1</td>
-      <td>25</td>
-      <td>97</td>
-      <td>3</td>
-      <td>3</td>
-      <td>53</td>
-      <td>54</td>
-      <td>5</td>
-      <td>6</td>
-      <td>15</td>
-    </tr>
-    <tr>
-      <th>267</th>
-      <td>whitero02</td>
-      <td>1995</td>
-      <td>NL</td>
-      <td>130</td>
-      <td>0.295</td>
-      <td>474</td>
-      <td>87</td>
-      <td>140</td>
-      <td>33</td>
-      <td>4</td>
-      <td>13</td>
-      <td>57</td>
-      <td>25</td>
-      <td>5</td>
-      <td>41</td>
-      <td>87</td>
-      <td>1</td>
-      <td>6</td>
-      <td>11</td>
-    </tr>
-    <tr>
-      <th>455</th>
-      <td>kellyro01</td>
-      <td>1989</td>
-      <td>AL</td>
-      <td>137</td>
-      <td>0.302</td>
-      <td>441</td>
-      <td>65</td>
-      <td>133</td>
-      <td>18</td>
-      <td>3</td>
-      <td>9</td>
-      <td>48</td>
-      <td>35</td>
-      <td>12</td>
-      <td>41</td>
-      <td>89</td>
-      <td>3</td>
-      <td>6</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>216</th>
-      <td>clarkwi02</td>
-      <td>1986</td>
-      <td>NL</td>
-      <td>111</td>
-      <td>0.287</td>
-      <td>408</td>
-      <td>66</td>
-      <td>117</td>
-      <td>27</td>
-      <td>2</td>
-      <td>11</td>
-      <td>41</td>
-      <td>4</td>
-      <td>7</td>
-      <td>34</td>
-      <td>76</td>
-      <td>10</td>
-      <td>3</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>758</th>
-      <td>knighra01</td>
-      <td>1979</td>
-      <td>NL</td>
-      <td>150</td>
-      <td>0.318</td>
-      <td>551</td>
-      <td>64</td>
-      <td>175</td>
-      <td>37</td>
-      <td>4</td>
-      <td>10</td>
-      <td>79</td>
-      <td>4</td>
-      <td>4</td>
-      <td>38</td>
-      <td>57</td>
-      <td>4</td>
-      <td>3</td>
-      <td>20</td>
-    </tr>
-    <tr>
-      <th>400</th>
-      <td>bakerdu01</td>
-      <td>1972</td>
-      <td>NL</td>
-      <td>127</td>
-      <td>0.321</td>
-      <td>446</td>
-      <td>62</td>
-      <td>143</td>
-      <td>27</td>
-      <td>2</td>
-      <td>17</td>
-      <td>76</td>
-      <td>4</td>
-      <td>7</td>
-      <td>45</td>
-      <td>68</td>
-      <td>2</td>
-      <td>4</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>646</th>
-      <td>grababi01</td>
-      <td>1970</td>
-      <td>NL</td>
-      <td>156</td>
-      <td>0.289</td>
-      <td>529</td>
-      <td>92</td>
-      <td>153</td>
-      <td>20</td>
-      <td>8</td>
-      <td>17</td>
-      <td>84</td>
-      <td>19</td>
-      <td>9</td>
-      <td>95</td>
-      <td>149</td>
-      <td>8</td>
-      <td>6</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>349</th>
-      <td>wardpe01</td>
-      <td>1963</td>
-      <td>AL</td>
-      <td>157</td>
-      <td>0.295</td>
-      <td>600</td>
-      <td>80</td>
-      <td>177</td>
-      <td>34</td>
-      <td>6</td>
-      <td>22</td>
-      <td>84</td>
-      <td>7</td>
-      <td>6</td>
-      <td>52</td>
-      <td>77</td>
-      <td>1</td>
-      <td>5</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>56</th>
-      <td>robinfl01</td>
-      <td>1961</td>
-      <td>AL</td>
-      <td>132</td>
-      <td>0.310</td>
-      <td>432</td>
-      <td>69</td>
-      <td>134</td>
-      <td>20</td>
-      <td>7</td>
-      <td>11</td>
-      <td>59</td>
-      <td>7</td>
-      <td>4</td>
-      <td>52</td>
-      <td>32</td>
-      <td>3</td>
-      <td>4</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>63</th>
-      <td>thomale03</td>
-      <td>1961</td>
-      <td>AL</td>
-      <td>130</td>
-      <td>0.284</td>
-      <td>450</td>
-      <td>77</td>
-      <td>128</td>
-      <td>11</td>
-      <td>5</td>
-      <td>24</td>
-      <td>70</td>
-      <td>0</td>
-      <td>5</td>
-      <td>47</td>
-      <td>74</td>
-      <td>2</td>
-      <td>2</td>
-      <td>12</td>
-    </tr>
-    <tr>
-      <th>428</th>
-      <td>cimolgi01</td>
-      <td>1957</td>
-      <td>NL</td>
-      <td>142</td>
-      <td>0.293</td>
-      <td>532</td>
-      <td>88</td>
-      <td>156</td>
-      <td>22</td>
-      <td>5</td>
-      <td>10</td>
-      <td>57</td>
-      <td>3</td>
-      <td>1</td>
-      <td>39</td>
-      <td>86</td>
-      <td>1</td>
-      <td>4</td>
-      <td>11</td>
-    </tr>
-    <tr>
-      <th>426</th>
-      <td>bouched01</td>
-      <td>1957</td>
-      <td>NL</td>
-      <td>154</td>
-      <td>0.293</td>
-      <td>574</td>
-      <td>78</td>
-      <td>168</td>
-      <td>35</td>
-      <td>8</td>
-      <td>17</td>
-      <td>76</td>
-      <td>1</td>
-      <td>0</td>
-      <td>84</td>
-      <td>91</td>
-      <td>6</td>
-      <td>14</td>
-      <td>15</td>
-    </tr>
-    <tr>
-      <th>830</th>
-      <td>klausbi01</td>
-      <td>1955</td>
-      <td>AL</td>
-      <td>135</td>
-      <td>0.283</td>
-      <td>541</td>
-      <td>83</td>
-      <td>153</td>
-      <td>26</td>
-      <td>2</td>
-      <td>7</td>
-      <td>60</td>
-      <td>6</td>
-      <td>0</td>
-      <td>60</td>
-      <td>44</td>
-      <td>0</td>
-      <td>0</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>168</th>
-      <td>careyan01</td>
-      <td>1954</td>
-      <td>AL</td>
-      <td>122</td>
-      <td>0.302</td>
-      <td>411</td>
-      <td>60</td>
-      <td>124</td>
-      <td>14</td>
-      <td>6</td>
-      <td>8</td>
-      <td>65</td>
-      <td>5</td>
-      <td>5</td>
-      <td>43</td>
-      <td>38</td>
-      <td>NaN</td>
-      <td>7</td>
-      <td>15</td>
-    </tr>
-    <tr>
-      <th>857</th>
-      <td>niemabo01</td>
-      <td>1952</td>
-      <td>AL</td>
-      <td>131</td>
-      <td>0.289</td>
-      <td>478</td>
-      <td>66</td>
-      <td>138</td>
-      <td>22</td>
-      <td>2</td>
-      <td>18</td>
-      <td>74</td>
-      <td>0</td>
-      <td>4</td>
-      <td>46</td>
-      <td>73</td>
-      <td>NaN</td>
-      <td>1</td>
-      <td>14</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
 </div>
 
 </div>
@@ -7981,14 +5232,14 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We have combed the Lahman database and found 30 potential snubs for ROTY. But how did these 30 campaigns actually fare in the ROTY voting? The following table displays the names, year, and league of our 30 snubs. It also displays the name of the pitcher who ultimately took home the Rookie of The Year Award for the player's year and league. The 'diff' column displays the decimal percentage difference between the winning pitcher and our snubbed hitter, relative to the total number of voting points avialble in that year's award poll.</p>
+<p>We have combed the Lahman database and found 30 potential snubs for ROTY. But how did these 30 campaigns actually fare in the ROTY voting? The following table displays the names, year, and league of our 30 snubs. It also displays the name of the pitcher who ultimately took home the Rookie of The Year Award for the snubbed player's year and league. The 'pct of max vote behind pitcher' column displays the decimal percentage difference between the winning pitcher and our snubbed hitter, relative to the total number of voting points avialble in that year's award poll.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[169]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">dfAwardsSharePlayers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">&#39;AwardsSharePlayers.csv&#39;</span><span class="p">)</span>
@@ -8003,19 +5254,20 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[170]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">winners</span> <span class="o">=</span> <span class="n">dfROTYwinnersPitching</span><span class="p">[[</span><span class="s">&#39;playerID&#39;</span><span class="p">,</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;nameFirst&#39;</span><span class="p">,</span><span class="s">&#39;nameLast&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dfAwardsSharePlayers</span><span class="p">[[</span><span class="s">&#39;playerID&#39;</span><span class="p">,</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;lgID&#39;</span><span class="p">,</span><span class="s">&#39;pointsWon&#39;</span><span class="p">,</span><span class="s">&#39;pointsMax&#39;</span><span class="p">]],</span><span class="n">how</span><span class="o">=</span><span class="s">&#39;inner&#39;</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;playerID&#39;</span><span class="p">,</span><span class="s">&#39;yearID&#39;</span><span class="p">])</span>
-<span class="n">winners</span> <span class="o">=</span> <span class="n">winners</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;playerID&#39;</span><span class="p">:</span><span class="s">&#39;pitcherID&#39;</span><span class="p">,</span><span class="s">&#39;pointsWon&#39;</span><span class="p">:</span><span class="s">&#39;pitcherpointsWon&#39;</span><span class="p">,</span><span class="s">&#39;nameFirst&#39;</span><span class="p">:</span><span class="s">&#39;pitchernameFirst&#39;</span><span class="p">,</span><span class="s">&#39;nameLast&#39;</span><span class="p">:</span><span class="s">&#39;pitchernameLast&#39;</span><span class="p">})</span>
+<span class="n">winners</span> <span class="o">=</span> <span class="n">winners</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;playerID&#39;</span><span class="p">:</span><span class="s">&#39;pitcherID&#39;</span><span class="p">,</span><span class="s">&#39;pointsWon&#39;</span><span class="p">:</span><span class="s">&#39;pitcherptsWon&#39;</span><span class="p">,</span><span class="s">&#39;nameFirst&#39;</span><span class="p">:</span><span class="s">&#39;pitcherNmFirst&#39;</span><span class="p">,</span><span class="s">&#39;nameLast&#39;</span><span class="p">:</span><span class="s">&#39;pitcherNmLast&#39;</span><span class="p">,</span><span class="s">&#39;pointsMax&#39;</span><span class="p">:</span><span class="s">&#39;ptsMax&#39;</span><span class="p">})</span>
 <span class="c">#winners.sort_values(&#39;yearID&#39;,ascending=False)</span>
 
-<span class="n">candidates</span> <span class="o">=</span> <span class="n">dfBattingCandidates_Stricter</span><span class="p">[[</span><span class="s">&#39;playerID&#39;</span><span class="p">,</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;lgID&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dfAwardsSharePlayers</span><span class="p">[[</span><span class="s">&#39;playerID&#39;</span><span class="p">,</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;lgID&#39;</span><span class="p">,</span><span class="s">&#39;pointsWon&#39;</span><span class="p">]],</span><span class="n">how</span><span class="o">=</span><span class="s">&#39;left&#39;</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;playerID&#39;</span><span class="p">,</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;lgID&#39;</span><span class="p">])</span>
+<span class="n">candidates</span> <span class="o">=</span> <span class="n">dfBattingCandidates_100g_400ab_282ba_60r</span><span class="p">[[</span><span class="s">&#39;playerID&#39;</span><span class="p">,</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;lgID&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dfAwardsSharePlayers</span><span class="p">[[</span><span class="s">&#39;playerID&#39;</span><span class="p">,</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;lgID&#39;</span><span class="p">,</span><span class="s">&#39;pointsWon&#39;</span><span class="p">]],</span><span class="n">how</span><span class="o">=</span><span class="s">&#39;left&#39;</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;playerID&#39;</span><span class="p">,</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;lgID&#39;</span><span class="p">])</span>
 <span class="c">#candidates.sort_values(&#39;yearID&#39;,ascending=False)</span>
 
 <span class="n">snubs</span> <span class="o">=</span> <span class="n">candidates</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">winners</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">&#39;left&#39;</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;lgID&#39;</span><span class="p">])</span>
-<span class="n">snubs</span><span class="p">[</span><span class="s">&#39;diff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span> <span class="n">snubs</span><span class="p">[</span><span class="s">&#39;pitcherpointsWon&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">snubs</span><span class="p">[</span><span class="s">&#39;pointsWon&#39;</span><span class="p">]</span> <span class="p">)</span> <span class="o">/</span> <span class="n">snubs</span><span class="p">[</span><span class="s">&#39;pointsMax&#39;</span><span class="p">]</span>
-<span class="c">#snubs.sort_values([&#39;diff&#39;,&#39;pointsMax&#39;])</span>
+<span class="n">snubs</span><span class="p">[</span><span class="s">&#39;pct of max vote behind pitcher&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span> <span class="n">snubs</span><span class="p">[</span><span class="s">&#39;pitcherptsWon&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">snubs</span><span class="p">[</span><span class="s">&#39;pointsWon&#39;</span><span class="p">]</span> <span class="p">)</span> <span class="o">/</span> <span class="n">snubs</span><span class="p">[</span><span class="s">&#39;ptsMax&#39;</span><span class="p">]</span>
+<span class="n">snubs</span><span class="p">[</span><span class="s">&#39;pct of max vote behind pitcher&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">snubs</span><span class="p">[</span><span class="s">&#39;pct of max vote behind pitcher&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">round_three</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">snubs</span><span class="p">[</span><span class="s">&#39;pct of max vote behind pitcher&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">snubs</span><span class="p">[</span><span class="s">&#39;pct of max vote behind pitcher&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mf">100.0</span><span class="p">)</span>
 
 <span class="c">#add names...</span>
 <span class="n">dfMaster</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">&#39;MASTER.csv&#39;</span><span class="p">)</span>
@@ -8023,8 +5275,8 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
 <span class="n">snubs</span> <span class="o">=</span> <span class="n">snubs</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dfMaster</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">&#39;inner&#39;</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s">&#39;playerID&#39;</span><span class="p">)</span>
 <span class="n">dfMaster</span> <span class="o">=</span> <span class="bp">None</span>
 
-<span class="n">snubs</span> <span class="o">=</span> <span class="n">snubs</span><span class="p">[[</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;lgID&#39;</span><span class="p">,</span><span class="s">&#39;nameFirst&#39;</span><span class="p">,</span><span class="s">&#39;nameLast&#39;</span><span class="p">,</span><span class="s">&#39;pointsWon&#39;</span><span class="p">,</span><span class="s">&#39;pitchernameFirst&#39;</span><span class="p">,</span><span class="s">&#39;pitchernameLast&#39;</span><span class="p">,</span><span class="s">&#39;pitcherpointsWon&#39;</span><span class="p">,</span><span class="s">&#39;pointsMax&#39;</span><span class="p">,</span><span class="s">&#39;diff&#39;</span><span class="p">]]</span>
-<span class="n">snubs</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s">&#39;diff&#39;</span><span class="p">,</span><span class="s">&#39;pointsMax&#39;</span><span class="p">])</span>
+<span class="n">snubs</span> <span class="o">=</span> <span class="n">snubs</span><span class="p">[[</span><span class="s">&#39;yearID&#39;</span><span class="p">,</span><span class="s">&#39;lgID&#39;</span><span class="p">,</span><span class="s">&#39;nameFirst&#39;</span><span class="p">,</span><span class="s">&#39;nameLast&#39;</span><span class="p">,</span><span class="s">&#39;pointsWon&#39;</span><span class="p">,</span><span class="s">&#39;pitcherNmFirst&#39;</span><span class="p">,</span><span class="s">&#39;pitcherNmLast&#39;</span><span class="p">,</span><span class="s">&#39;pitcherptsWon&#39;</span><span class="p">,</span><span class="s">&#39;ptsMax&#39;</span><span class="p">,</span><span class="s">&#39;pct of max vote behind pitcher&#39;</span><span class="p">]]</span>
+<span class="n">snubs</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s">&#39;pct of max vote behind pitcher&#39;</span><span class="p">,</span><span class="s">&#39;yearID&#39;</span><span class="p">],</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -8035,7 +5287,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[170]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[26]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -8048,326 +5300,14 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <th>nameFirst</th>
       <th>nameLast</th>
       <th>pointsWon</th>
-      <th>pitchernameFirst</th>
-      <th>pitchernameLast</th>
-      <th>pitcherpointsWon</th>
-      <th>pointsMax</th>
-      <th>diff</th>
+      <th>pitcherNmFirst</th>
+      <th>pitcherNmLast</th>
+      <th>pitcherptsWon</th>
+      <th>ptsMax</th>
+      <th>pct of max vote behind pitcher</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>23</th>
-      <td>1998</td>
-      <td>NL</td>
-      <td>Todd</td>
-      <td>Helton</td>
-      <td>119</td>
-      <td>Kerry</td>
-      <td>Wood</td>
-      <td>128</td>
-      <td>160</td>
-      <td>0.056250</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>2000</td>
-      <td>AL</td>
-      <td>Terrence</td>
-      <td>Long</td>
-      <td>83</td>
-      <td>Kazuhiro</td>
-      <td>Sasaki</td>
-      <td>104</td>
-      <td>140</td>
-      <td>0.150000</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>2010</td>
-      <td>AL</td>
-      <td>Austin</td>
-      <td>Jackson</td>
-      <td>98</td>
-      <td>Neftali</td>
-      <td>Feliz</td>
-      <td>122</td>
-      <td>140</td>
-      <td>0.171429</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>1963</td>
-      <td>AL</td>
-      <td>Pete</td>
-      <td>Ward</td>
-      <td>6</td>
-      <td>Gary</td>
-      <td>Peters</td>
-      <td>10</td>
-      <td>20</td>
-      <td>0.200000</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>2003</td>
-      <td>NL</td>
-      <td>Scott</td>
-      <td>Podsednik</td>
-      <td>81</td>
-      <td>Dontrelle</td>
-      <td>Willis</td>
-      <td>118</td>
-      <td>160</td>
-      <td>0.231250</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1961</td>
-      <td>AL</td>
-      <td>Floyd</td>
-      <td>Robinson</td>
-      <td>2</td>
-      <td>Don</td>
-      <td>Schwall</td>
-      <td>7</td>
-      <td>20</td>
-      <td>0.250000</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1961</td>
-      <td>AL</td>
-      <td>Lee</td>
-      <td>Thomas</td>
-      <td>2</td>
-      <td>Don</td>
-      <td>Schwall</td>
-      <td>7</td>
-      <td>20</td>
-      <td>0.250000</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2005</td>
-      <td>AL</td>
-      <td>Robinson</td>
-      <td>Cano</td>
-      <td>57</td>
-      <td>Huston</td>
-      <td>Street</td>
-      <td>97</td>
-      <td>140</td>
-      <td>0.285714</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>1999</td>
-      <td>NL</td>
-      <td>Warren</td>
-      <td>Morris</td>
-      <td>69</td>
-      <td>Scott</td>
-      <td>Williamson</td>
-      <td>118</td>
-      <td>160</td>
-      <td>0.306250</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>2000</td>
-      <td>AL</td>
-      <td>Mark</td>
-      <td>Quinn</td>
-      <td>56</td>
-      <td>Kazuhiro</td>
-      <td>Sasaki</td>
-      <td>104</td>
-      <td>140</td>
-      <td>0.342857</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>2011</td>
-      <td>AL</td>
-      <td>Eric</td>
-      <td>Hosmer</td>
-      <td>38</td>
-      <td>Jeremy</td>
-      <td>Hellickson</td>
-      <td>102</td>
-      <td>140</td>
-      <td>0.457143</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>1957</td>
-      <td>NL</td>
-      <td>Ed</td>
-      <td>Bouchee</td>
-      <td>4</td>
-      <td>Jack</td>
-      <td>Sanford</td>
-      <td>16</td>
-      <td>24</td>
-      <td>0.500000</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>1955</td>
-      <td>AL</td>
-      <td>Billy</td>
-      <td>Klaus</td>
-      <td>5</td>
-      <td>Herb</td>
-      <td>Score</td>
-      <td>18</td>
-      <td>24</td>
-      <td>0.541667</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>2003</td>
-      <td>NL</td>
-      <td>Marlon</td>
-      <td>Byrd</td>
-      <td>6</td>
-      <td>Dontrelle</td>
-      <td>Willis</td>
-      <td>118</td>
-      <td>160</td>
-      <td>0.700000</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>2006</td>
-      <td>AL</td>
-      <td>Kenji</td>
-      <td>Johjima</td>
-      <td>10</td>
-      <td>Justin</td>
-      <td>Verlander</td>
-      <td>133</td>
-      <td>140</td>
-      <td>0.878571</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>2006</td>
-      <td>AL</td>
-      <td>Nick</td>
-      <td>Markakis</td>
-      <td>7</td>
-      <td>Justin</td>
-      <td>Verlander</td>
-      <td>133</td>
-      <td>140</td>
-      <td>0.900000</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>1986</td>
-      <td>NL</td>
-      <td>Will</td>
-      <td>Clark</td>
-      <td>5</td>
-      <td>Todd</td>
-      <td>Worrell</td>
-      <td>118</td>
-      <td>120</td>
-      <td>0.941667</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>2006</td>
-      <td>AL</td>
-      <td>Ian</td>
-      <td>Kinsler</td>
-      <td>1</td>
-      <td>Justin</td>
-      <td>Verlander</td>
-      <td>133</td>
-      <td>140</td>
-      <td>0.942857</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>1954</td>
-      <td>AL</td>
-      <td>Andy</td>
-      <td>Carey</td>
-      <td>NaN</td>
-      <td>Bob</td>
-      <td>Grim</td>
-      <td>15</td>
-      <td>24</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>1972</td>
-      <td>NL</td>
-      <td>Dusty</td>
-      <td>Baker</td>
-      <td>NaN</td>
-      <td>Jon</td>
-      <td>Matlack</td>
-      <td>19</td>
-      <td>24</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>1957</td>
-      <td>NL</td>
-      <td>Gino</td>
-      <td>Cimoli</td>
-      <td>NaN</td>
-      <td>Jack</td>
-      <td>Sanford</td>
-      <td>16</td>
-      <td>24</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>1970</td>
-      <td>NL</td>
-      <td>Billy</td>
-      <td>Grabarkewitz</td>
-      <td>NaN</td>
-      <td>Carl</td>
-      <td>Morton</td>
-      <td>11</td>
-      <td>24</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>1979</td>
-      <td>NL</td>
-      <td>Ray</td>
-      <td>Knight</td>
-      <td>NaN</td>
-      <td>Rick</td>
-      <td>Sutcliffe</td>
-      <td>20</td>
-      <td>24</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>1952</td>
-      <td>AL</td>
-      <td>Bob</td>
-      <td>Nieman</td>
-      <td>NaN</td>
-      <td>Harry</td>
-      <td>Byrd</td>
-      <td>9</td>
-      <td>24</td>
-      <td>NaN</td>
-    </tr>
     <tr>
       <th>3</th>
       <td>2005</td>
@@ -8379,7 +5319,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <td>Street</td>
       <td>97</td>
       <td>140</td>
-      <td>NaN</td>
+      <td>100.0</td>
     </tr>
     <tr>
       <th>5</th>
@@ -8392,46 +5332,7 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <td>Street</td>
       <td>97</td>
       <td>140</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>1995</td>
-      <td>NL</td>
-      <td>Rondell</td>
-      <td>White</td>
-      <td>NaN</td>
-      <td>Hideo</td>
-      <td>Nomo</td>
-      <td>118</td>
-      <td>140</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>1989</td>
-      <td>AL</td>
-      <td>Roberto</td>
-      <td>Kelly</td>
-      <td>NaN</td>
-      <td>Gregg</td>
-      <td>Olson</td>
-      <td>136</td>
-      <td>140</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>1999</td>
-      <td>NL</td>
-      <td>Ronnie</td>
-      <td>Belliard</td>
-      <td>NaN</td>
-      <td>Scott</td>
-      <td>Williamson</td>
-      <td>118</td>
-      <td>160</td>
-      <td>NaN</td>
+      <td>100.0</td>
     </tr>
     <tr>
       <th>26</th>
@@ -8444,7 +5345,358 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
       <td>Willis</td>
       <td>118</td>
       <td>160</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1999</td>
+      <td>NL</td>
+      <td>Ronnie</td>
+      <td>Belliard</td>
       <td>NaN</td>
+      <td>Scott</td>
+      <td>Williamson</td>
+      <td>118</td>
+      <td>160</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>1995</td>
+      <td>NL</td>
+      <td>Rondell</td>
+      <td>White</td>
+      <td>NaN</td>
+      <td>Hideo</td>
+      <td>Nomo</td>
+      <td>118</td>
+      <td>140</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>1989</td>
+      <td>AL</td>
+      <td>Roberto</td>
+      <td>Kelly</td>
+      <td>NaN</td>
+      <td>Gregg</td>
+      <td>Olson</td>
+      <td>136</td>
+      <td>140</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>1979</td>
+      <td>NL</td>
+      <td>Ray</td>
+      <td>Knight</td>
+      <td>NaN</td>
+      <td>Rick</td>
+      <td>Sutcliffe</td>
+      <td>20</td>
+      <td>24</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>1972</td>
+      <td>NL</td>
+      <td>Dusty</td>
+      <td>Baker</td>
+      <td>NaN</td>
+      <td>Jon</td>
+      <td>Matlack</td>
+      <td>19</td>
+      <td>24</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>1970</td>
+      <td>NL</td>
+      <td>Billy</td>
+      <td>Grabarkewitz</td>
+      <td>NaN</td>
+      <td>Carl</td>
+      <td>Morton</td>
+      <td>11</td>
+      <td>24</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>1957</td>
+      <td>NL</td>
+      <td>Gino</td>
+      <td>Cimoli</td>
+      <td>NaN</td>
+      <td>Jack</td>
+      <td>Sanford</td>
+      <td>16</td>
+      <td>24</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1954</td>
+      <td>AL</td>
+      <td>Andy</td>
+      <td>Carey</td>
+      <td>NaN</td>
+      <td>Bob</td>
+      <td>Grim</td>
+      <td>15</td>
+      <td>24</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>1952</td>
+      <td>AL</td>
+      <td>Bob</td>
+      <td>Nieman</td>
+      <td>NaN</td>
+      <td>Harry</td>
+      <td>Byrd</td>
+      <td>9</td>
+      <td>24</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2006</td>
+      <td>AL</td>
+      <td>Ian</td>
+      <td>Kinsler</td>
+      <td>1</td>
+      <td>Justin</td>
+      <td>Verlander</td>
+      <td>133</td>
+      <td>140</td>
+      <td>94.3</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1986</td>
+      <td>NL</td>
+      <td>Will</td>
+      <td>Clark</td>
+      <td>5</td>
+      <td>Todd</td>
+      <td>Worrell</td>
+      <td>118</td>
+      <td>120</td>
+      <td>94.2</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2006</td>
+      <td>AL</td>
+      <td>Nick</td>
+      <td>Markakis</td>
+      <td>7</td>
+      <td>Justin</td>
+      <td>Verlander</td>
+      <td>133</td>
+      <td>140</td>
+      <td>90.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2006</td>
+      <td>AL</td>
+      <td>Kenji</td>
+      <td>Johjima</td>
+      <td>10</td>
+      <td>Justin</td>
+      <td>Verlander</td>
+      <td>133</td>
+      <td>140</td>
+      <td>87.9</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>2003</td>
+      <td>NL</td>
+      <td>Marlon</td>
+      <td>Byrd</td>
+      <td>6</td>
+      <td>Dontrelle</td>
+      <td>Willis</td>
+      <td>118</td>
+      <td>160</td>
+      <td>70.0</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>1955</td>
+      <td>AL</td>
+      <td>Billy</td>
+      <td>Klaus</td>
+      <td>5</td>
+      <td>Herb</td>
+      <td>Score</td>
+      <td>18</td>
+      <td>24</td>
+      <td>54.2</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>1957</td>
+      <td>NL</td>
+      <td>Ed</td>
+      <td>Bouchee</td>
+      <td>4</td>
+      <td>Jack</td>
+      <td>Sanford</td>
+      <td>16</td>
+      <td>24</td>
+      <td>50.0</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>2011</td>
+      <td>AL</td>
+      <td>Eric</td>
+      <td>Hosmer</td>
+      <td>38</td>
+      <td>Jeremy</td>
+      <td>Hellickson</td>
+      <td>102</td>
+      <td>140</td>
+      <td>45.7</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2000</td>
+      <td>AL</td>
+      <td>Mark</td>
+      <td>Quinn</td>
+      <td>56</td>
+      <td>Kazuhiro</td>
+      <td>Sasaki</td>
+      <td>104</td>
+      <td>140</td>
+      <td>34.3</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1999</td>
+      <td>NL</td>
+      <td>Warren</td>
+      <td>Morris</td>
+      <td>69</td>
+      <td>Scott</td>
+      <td>Williamson</td>
+      <td>118</td>
+      <td>160</td>
+      <td>30.6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2005</td>
+      <td>AL</td>
+      <td>Robinson</td>
+      <td>Cano</td>
+      <td>57</td>
+      <td>Huston</td>
+      <td>Street</td>
+      <td>97</td>
+      <td>140</td>
+      <td>28.6</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1961</td>
+      <td>AL</td>
+      <td>Floyd</td>
+      <td>Robinson</td>
+      <td>2</td>
+      <td>Don</td>
+      <td>Schwall</td>
+      <td>7</td>
+      <td>20</td>
+      <td>25.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1961</td>
+      <td>AL</td>
+      <td>Lee</td>
+      <td>Thomas</td>
+      <td>2</td>
+      <td>Don</td>
+      <td>Schwall</td>
+      <td>7</td>
+      <td>20</td>
+      <td>25.0</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>2003</td>
+      <td>NL</td>
+      <td>Scott</td>
+      <td>Podsednik</td>
+      <td>81</td>
+      <td>Dontrelle</td>
+      <td>Willis</td>
+      <td>118</td>
+      <td>160</td>
+      <td>23.1</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>1963</td>
+      <td>AL</td>
+      <td>Pete</td>
+      <td>Ward</td>
+      <td>6</td>
+      <td>Gary</td>
+      <td>Peters</td>
+      <td>10</td>
+      <td>20</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2010</td>
+      <td>AL</td>
+      <td>Austin</td>
+      <td>Jackson</td>
+      <td>98</td>
+      <td>Neftali</td>
+      <td>Feliz</td>
+      <td>122</td>
+      <td>140</td>
+      <td>17.1</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2000</td>
+      <td>AL</td>
+      <td>Terrence</td>
+      <td>Long</td>
+      <td>83</td>
+      <td>Kazuhiro</td>
+      <td>Sasaki</td>
+      <td>104</td>
+      <td>140</td>
+      <td>15.0</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>1998</td>
+      <td>NL</td>
+      <td>Todd</td>
+      <td>Helton</td>
+      <td>119</td>
+      <td>Kerry</td>
+      <td>Wood</td>
+      <td>128</td>
+      <td>160</td>
+      <td>5.6</td>
     </tr>
   </tbody>
 </table>
@@ -8485,18 +5737,18 @@ GEENAIDFCGoAACxGUAMAYDGCGgAAixHUAABYjKAGAMBi/w9w5eU97MwmPQAAAABJRU5ErkJggg==
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre> 
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="References:">References:<a class="anchor-link" href="#References:">&#182;</a></h4><ul>
+<li>Wikipedia "Major League Baseball Rookie of the Year Award" (<a href="https://en.wikipedia.org/wiki/Major_League_Baseball_Rookie_of_the_Year_Award">https://en.wikipedia.org/wiki/Major_League_Baseball_Rookie_of_the_Year_Award</a>)</li>
+<li>2014 Lahman Baseball Database (<a href="http://seanlahman.com/files/database/readme2014.txt">http://seanlahman.com/files/database/readme2014.txt</a>)</li>
+</ul>
 
 </div>
 </div>
-</div>
-
 </div>
     </div>
   </div>
