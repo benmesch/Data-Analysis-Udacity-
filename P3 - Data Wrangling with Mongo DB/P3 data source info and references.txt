@@ -1,0 +1,26 @@
+The OpenStreetMap area I used is available from MapZen (“Milwaukee, Wisconsin”) at https://mapzen.com/data/metro-extracts/#milwaukee-wisconsin
+
+Here is the metadata for the MapZen .osm file I worked with (file sizes, etc. available in the project summary pdf)
+osm: {'timestamp': '2016-02-13T00:26:02Z', 'version': '0.6', 'generator': 'osmconvert 0.7T'}
+bounds: {'minlat': '42.656', 'maxlon': '-87.522', 'minlon': '-88.511', 'maxlat': '43.389'}
+
+The MapZen metro Milwaukee, Wisconsin was chosen because that is where I live.
+
+
+
+Web Resources Used for this Project:
+*Udacity / MongoDB / Shannon Bradshaw / Gundega Dekena, online course “Data Wrangling with MongoDB” https://www.udacity.com/course/data-wrangling-with-mongodb--ud032-nd
+
+*OpenStreetMap- https://www.openstreetmap.org/relation/251075 
+*MapZen OSM Extract Source- https://mapzen.com/data/metro-extracts/#milwaukee-wisconsin 
+*OSM Data Model Information- http://wiki.openstreetmap.org/wiki/OSM_XML 
+
+*Woodpeck_fixbot OSM user wiki- http://wiki.openstreetmap.org/wiki/Fixbot 
+*Woodpeck_fixbot Operation to Remove TIGER tags from nodes- http://wiki.openstreetmap.org/wiki/TIGER_fixup/node_tags 
+*GNIS OSM tags- http://wiki.openstreetmap.org/wiki/USGS_GNIS
+*Seamark OSM tags-  http://wiki.openstreetmap.org/wiki/Key:seamark
+
+*Python iterparse start and end event information- https://docs.python.org/2/library/xml.etree.elementtree.html#xml.etree.ElementTree.iterparse 
+*Specific reference for cElementTree- http://effbot.org/zone/element-iterparse.htm#usage)
+*More details for iterparse start events using cElementTree- https://mail.python.org/pipermail/xml-sig/2005-January/010838.html
+

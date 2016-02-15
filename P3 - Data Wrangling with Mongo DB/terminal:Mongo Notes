@@ -1,0 +1,59 @@
+terminal: type sudo mongod to start up local mongo database
+	(using https://www.youtube.com/watch?v=AhMdrlgI0Bc method, which is just to use home-brew. no need to edit PATH variable or anything, which tripped me up when i tried by myself) 
+	open new terminal window to connect to it…
+	    type just ‘mongo’ and it will connect to test the first time
+	    type just ‘db’ to see what database you’re connected to
+	    type j = {name : ‘asdf’} to assign variable j
+	    type db.testData.insert(j) to insert new document to collection “testData”
+
+
+		https://www.youtube.com/watch?v=nMoscn8-620 for other mongo help 
+		(download tar from website method)
+
+http://stackoverflow.com/questions/13827915/location-of-the-mongodb-database-on-mac
+	Thanks @Mark, I keep forgetting this again and again. 
+		After installing MongoDB with Homebrew:		
+		* The databases are stored in the /usr/local/var/mongodb/ directory
+		* The mongod.conf file is here: /usr/local/etc/mongod.conf
+		* The mongo logs can be found at /usr/local/var/log/mongodb/		
+		* The mongo binaries are here: /usr/local/Cellar/mongodb//bin
+
+	to access in finder: Choose Go to Folder from the Finder's Go menu and provide /usr/local/ as the path.
+
+My Notes on Running LocalHost MongoDB:
+1.in 1st terminal window: type sudo mongod to start the localhost mongo database
+2.in 2nd terminal window: type mongo to start the shell
+	can type “db” to see what database we’re using (“test” by default)
+	can type db.getCollectionNames() to see what collections (tables) are in db
+	can query mongo directly in this shell application, instead of using python scripts:
+		db.[collection].find().pretty() <- can’t use the pretty() method outside of the shell…
+3.save python code as .py files somewhere
+	python code should start with... 
+		from pymongo import MongoClient
+		client = MongoClient(“mongoldb://localhost:27017”)
+		db =  client.test #this is the db name
+		for x in db.[collection].find():
+			print x #print all documents in [collection]. use pprint.pprint(x) since we can’t use .pretty() outside of shell (example: in python scripts)
+	use csv (with open([path],'r') as f: ...) to read csv as dictionary and then use db.[colletion].insert(dict row) to insert data into mongo
+4.run python scripts in 3rd terminal window: type python [filename].py
+	may need to change directory of the 3rd terminal window to wherever we saved the file:
+		example: typed “cd ~/Desktop” to change directory to the desktop folder
+		use “ls” to see all files in current directory
+		use "cd ./[sub folder name]" to enter a subfolder of the current directory
+		use "cd .." to navigate up one folder
+
+
+
+
+
+
+
+
+http://apple.stackexchange.com/questions/22859/bash-ls-command-not-found
+	^that answer helped me when i messed up my PATH and couldn’t even use “ls” command… after that i just used homebrew to install mongo and had zero issues
+	@bmike thanks! added that to .bash_profile and it's all working now. had to open .bash_profile like this:/usr/bin/vi ~/.bash_profile 
+
+
+
+	# added by Anaconda 2.3.0 installer
+	export PATH="/Users/ben/anaconda/bin:$PATH"
