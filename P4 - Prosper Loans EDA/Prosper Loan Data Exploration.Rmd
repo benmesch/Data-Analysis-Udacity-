@@ -1,0 +1,731 @@
+# Prosper Load Data Exploration 
+## Ben Mescher
+========================================================
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, packages}
+# Load all of the packages that you end up using
+# in your analysis in this code chunk.
+
+library(ggplot2)
+library(gridExtra)
+library(scales)
+library(memisc)
+library(lubridate)
+library(dplyr)
+theme_set(theme_minimal(20))
+```
+
+This analysis explores a dataset containing 81 features for 113,937 loans created by the marketplace lending company Prosper from 2005 until March 2014.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, Load_the_Data}
+setwd('~/Documents/old Data Analysis (Udacity)/P4 - Prosper Loans EDA')
+getwd()
+loans = read.csv('prosperLoanData.csv')
+```
+
+# Univariate Plots Section
+```{r echo=FALSE, message=FALSE, warning=FALSE, initial_features}
+# get a quick feel for structur of our dataframe
+dim(loans)
+str(loans)
+head(loans)
+```
+
+The dataset contains 81 features for 113,937 loans. 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, Univariate_Plots_listingcreation}
+# create a couple functions for formatting string 
+# columns into other datatypes
+save_as_date <- function(variable) {
+  return (parse_date_time(variable, c('%Y/%m/%d hms')))
+}
+
+save_as_factor <- function(date.vector, frmt) {
+  numeric.vector <- as.numeric(strftime(date.vector, frmt))
+  return (factor(numeric.vector,
+                 levels = sort(unique(numeric.vector)),
+                 ordered = T))
+}
+
+# format listing creation date and save variables by month, 
+# year, and year-month 
+loans$ListingCreationDate       <- save_as_date(
+  loans$ListingCreationDate)
+loans$ListingCreation.month     <- save_as_factor(
+  loans$ListingCreationDate, '%m')
+loans$ListingCreation.year      <- save_as_factor(
+  loans$ListingCreationDate, '%Y')
+loans$ListingCreation.yearmonth <- save_as_factor(
+  loans$ListingCreationDate, '%Y%m')
+
+# plot loans by their creation date
+ggplot(aes(x = ListingCreation.year), data = loans) +
+  geom_bar(stat = 'count')
+# can optionally use ListingCreation.yearmonth
+# which shows January to be most common loan creation month
+```
+
+The largest fraction of the loans were created in 2013 and 2014 (keep in mind that only 3 months' worth of loans from 2014 are in this dataset). Very few loans were created in 2009, when the economy was deep in recession and Prosper was changing its loan grading scale.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, Univariate_Plots_numberofloans}
+# how many loans do individual members take out?
+membercounts <- loans %>%
+  group_by(MemberKey) %>% 
+  summarise(number.of.loans = n())
+str(loans$MemberKey)
+table(membercounts$number.of.loans)
+ggplot(aes(x = number.of.loans), data = membercounts) +
+  geom_bar(stat = 'count') + 
+  scale_x_continuous(breaks = seq(1, 10, 1))
+
+# plot loan term length (in years)
+ggplot(aes(x = Term / 12), data = loans) +
+  geom_histogram(binwidth = .5) +
+  scale_x_continuous(breaks = seq(1, 6, 1))
+```
+
+The majority of the 90,831 Prosper members in the data set have only created a single loan listing. The vast majority of loans are for three year terms, with 5 and 1 year terms also being used occasionally.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, Univariate_Plots_grades}
+# plot distribution of creditgrades (applicable only for pre 2009 loans)
+ggplot(aes(x = CreditGrade, 
+           title = 'Created 2005-2008'),
+       data = subset(loans, ListingCreation.year < 2009)) +
+  geom_bar(stat = 'count')
+
+# plot distribution of prosper ratings (applicable for post2009 loans)
+ggplot(aes(x = ProsperRating..Alpha.,
+           title = 'Created 2009-March 2014'),
+       data = subset(loans, ListingCreation.year > 2008)) +
+  geom_bar(stat = 'count')
+with((subset(loans, ListingCreation.year >2008)), 
+     table(ProsperRating..Alpha.))
+```
+
+Prosper changed its loan underwriting in 2009. Loans created prior to 2009 were given Prosper "CreditGrades", while starting in 2009 loans were given "ProsperRatings". Other than the volume of loans, the largest difference between these two loan populations is that there are much more "A" rated loans in the post-2009 period. "CreditGraded" loans in the pre-2009 period followed a much more normal distribution of grades.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, Univariate_Plots_LoanStatusDefault}
+# loan status info here: 
+# http://www.orchardplatform.com/blog/understanding-loan-statuses/
+# remove cancelled loan outliers (only 5 rows)
+table(loans$LoanStatus)
+head(loans[loans$LoanStatus == 'Cancelled',
+           c("LoanStatus", "CreditGrade", "LoanOriginalAmount",
+            "ListingCreationDate", "LoanOriginationDate", "ClosedDate")])
+loans <- subset(loans, LoanStatus != 'Cancelled')
+table(loans$LoanStatus)
+```
+
+The default loan status factor has many different levels for Past Due loans, and separates Chargedoff and Defaulted loans (though Chargedoff loans will mostly become 'defaulted', see: http://www.orchardplatform.com/blog/understanding-loan-statuses/). "Cancelled" loans are an outlier which only occur on 5 loans from pre-2009, so I will remove those loans from the data frame.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, Univariate_Plots_LoanStatusBucketed}
+# create a new bucketed column for grouping similar loan statuses together
+loans$LoanStatus.bucketed <- ifelse(
+  substr(loans$LoanStatus, 1, 8) == 'Past Due',
+                                    'Defaulted', 
+                                    as.character(loans$LoanStatus))
+loans$LoanStatus.bucketed <- ifelse(
+  loans$LoanStatus.bucketed == 'FinalPaymentInProgress',
+                                    'Current', 
+                                    as.character(loans$LoanStatus.bucketed))
+loans$LoanStatus.bucketed <- ifelse(
+  loans$LoanStatus.bucketed == 'Chargedoff',
+                                    'Defaulted',
+                                    as.character(loans$LoanStatus.bucketed))
+
+ggplot(aes(x = LoanStatus.bucketed), data = loans) +
+  geom_bar(stat = 'count') +  
+  coord_flip()
+```
+
+The raw LoanStatus from the data set reveals the overwhelming majority of loans to be in "Defaulted", "Current", "Completed", or "Chargedoff" status. To accomodate the rest of this analysis, I created a new factor column "LoanStatus.bucketed" which buckets Defaulted, Chargedoff, and all the Past Due statuses as "Defaulted". I also bucket FinalPaymentInProgress with Current loans into a "Current" bucket.
+
+The rationale for this bucketing approach can be found here: http://www.orchardplatform.com/blog/understanding-loan-statuses/
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, Univariate_Plots_ListingCategory}
+# load plyr to use the 'mapvalues()' function 
+# plyr will conflict with dplyr, so load dplyr again at end of code block
+library(plyr) 
+
+# translate listing category integers to labels
+loans$ListingCategory <- mapvalues(loans$ListingCategory..numeric.
+          ,from = c(0:20)
+          ,to   = c("Not Available","Debt Consolidation","Home Improvement",
+                    "Business","Personal Loan","Student Use","Auto","Other",
+                    "Baby&Adoption","Boat","Cosmetic Procedure",
+                    "Engagement Ring","Green Loans","Household Expenses",
+                    "Large Purchases","Medical/Dental","Motorcycle","RV",
+                    "Taxes", "Vacation","Wedding Loans"))
+
+# use reorder() to plot in order of frequency
+ggplot(data = loans,
+       aes(x = reorder(ListingCategory, ListingCategory,
+                     function(x) - length(x)))) +
+  geom_bar() + 
+  coord_flip()
+# use this layer to plot on a log scale... not super useful though
+#  scale_y_log10(breaks = c(100, 1000, 5000, 60000))
+detach("package:plyr")
+library(dplyr)
+```
+
+The loan listing category (reason for loan), needed to be converted into string format from its raw numeric category value. Doing so reveals listing category to be distributed exponentially, with "Debt Consolidation", "Not Available", and "Other" to be the leading categories. With around three quarters of our dataset having one of those three listing categories, this column is unlikely to be able to be useful for further exploration.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, Univariate_Plots_Yields}
+# more info: https://www.prosper.com/Downloads/Services/Documentation/ProsperAPI_Objects_Details.html
+# borrowerrate is the actual rate paid by borrower
+p1 <- ggplot(aes(y = BorrowerRate, x = "for all loans"), data = loans) +
+  geom_boxplot() + 
+  labs(x = "")
+
+# lender yield = borrowerrate - service fees paid by investors (usually 1%)
+p2 <- ggplot(aes(y = LenderYield, x = "for all loans"), data = loans) +
+  geom_boxplot() + 
+  labs(x = "")
+
+# prosper does estimates for post 2009 loans...
+# est eff yield = borrower rate - interest charge offs 
+# est loss = principal charge offs
+# est return = borrower rate - interest and principal charge offs 
+p3 <- ggplot(aes(y = EstimatedLoss, x = "for all loans"), data = loans) +
+  geom_boxplot() + 
+  labs(x = "")
+
+p4 <- ggplot(aes(y = EstimatedReturn, x = "for all loans"), data = loans) +
+  geom_boxplot() + 
+  labs(x = "")
+
+p1 # plot borrower rates paid
+table(round(loans$BorrowerRate * 100) / 100) #there is a large spike of borrower rates at 32%
+grid.arrange(p3, p4, ncol = 2)  #plot prospers estimates of loss and return
+summary(loans$EstimatedReturn)
+
+# looks like estimaged effective yield - estimated loss = est.return 
+# (2009- only)
+
+# borrower apr <> borrower rate
+# borrowerrate - service fees = lenderyeild (estimated)
+```
+
+The data set contains many columns related to interest rates and estimated returns. I spent much time looking at sample rows of these columns and found BorrowerRate, Estimated Loss, and Estimated Return to be the most interesting. BorrowerRate seems to be somewhat normally distributed, skewing towards 0%, though binning the borrower rates by 1% bins reveals the somewhat curious fact that 32% is the most common borrower rate by far. 
+
+For post-2009 loans, Prosper also includes loss and return estimates. Losses are generally less than 20%, and the IQR for Prosper's estimated returns of its loans is (7.4%,11.7%)
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, Univariate_Plots_Paid}
+loans$ClosedDate          <- save_as_date(loans$ClosedDate)
+loans$LoanOriginationDate <- save_as_date(loans$LoanOriginationDate)
+
+# save closed cycle number as a time length in months
+loans$ClosedCycleNumber <- as.period(
+  interval(loans$LoanOriginationDate, loans$ClosedDate)
+  ,unit = "month")@month
+
+# these columns are relevant mostly for completed loans
+comp.columns <- c("LoanOriginationDate", "ClosedDate",
+          "LoanOriginalAmount", "MonthlyLoanPayment",
+          "Term", "ClosedCycleNumber", "EstimatedEffectiveYield",
+          "BorrowerAPR", "BorrowerRate", "LenderYield",
+          "LP_CustomerPayments", "LP_InterestandFees",
+          "LP_ServiceFees", "LP_CollectionFees"
+          )
+
+# some columns only apply to defaulted and chargedoff loans:
+def.columns <- c(comp.columns,
+          "LP_GrossPrincipalLoss", 
+          "LP_NetPrincipalLoss",
+          "LP_NonPrincipalRecoverypayments",
+          "LoanFirstDefaultedCycleNumber"
+          )
+
+# use to examine the payment and loss columns closer
+# head(subset(loans,LoanStatus=="Completed" &
+#              ListingCreation.year==2008)[ ,comp.columns ])
+# head(subset(loans,LoanStatus=="Defaulted" &
+#              ListingCreation.year==2008)[ ,def.columns ])
+
+
+# LP_CustomerPayments = total paid
+# LP_ServiceFees = fees paid by investors
+# LP_CollectionFees = fees paid by investors for collections 
+#   operations on the load
+# ^not populated for all defaulted loans, only those that do collections?
+# LP_GrossPrincipalLoss,LP_NetPrincipalLoss = principal write off 
+#   before/after collections
+# LP_NonPrincipalRecoverypayments = fees/interest/then principal collected
+
+
+# commenting out this because only defaulted loans populate 
+# "principal loss" columns
+# ggplot(aes(x=LP_GrossPrincipalLoss), data = loans) +
+#   geom_histogram(binwidth=100)
+# head(loans[loans$LP_GrossPrincipalLoss>0,'LP_GrossPrincipalLoss'])
+
+ggplot(aes(y = LP_CustomerPayments / LoanOriginalAmount,
+           x = LoanStatus.bucketed)
+             , data = subset(loans, LP_CustomerPayments > 0)) +
+  geom_boxplot() + 
+  geom_hline(yintercept = 1.0, linetype = 3) +
+  labs(y = "% of principal paid off")
+
+by(loans$LP_CustomerPayments / loans$LoanOriginalAmount,
+   loans$LoanStatus.bucketed,
+   summary)
+```
+
+I spent a lot of time exploring the different columns for amount paid, amount written off, amount recovered, etc. For completed loans, you can see that the median total paid by the borrower is 117% of the original loan principal, while the IQR is (109%, 129%)
+
+Defaulted loans also show an interesting behavior when plotting amount paid: the median paid by defaulting loan borrowers is 38%, though the range of % of original principal paid is quite large and some defaulters actually paid more than the original loan amount before defaulting. The data set contains a few useful columns which populate only for defaulted loans:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, Univariate_Plots_Defaults}
+ggplot(aes(x = LoanStatus.bucketed,
+           y = 100.0 * LP_NetPrincipalLoss / LoanOriginalAmount),
+             data = subset( loans, LP_NetPrincipalLoss > 0)) +
+  geom_boxplot() + 
+  geom_hline(yintercept = 50, linetype = 3) +
+  labs(y = "% of principal lost")
+
+# commenting out since the custom column "ClosedCycleNumber" can do this 
+# for both defaulted and completed loans
+# ggplot(aes(x=LoanFirstDefaultedCycleNumber/Term), data = loans) +
+#  geom_histogram(binwidth = 0.2) +
+#  scale_x_continuous(breaks=seq(0,1,.2)) 
+
+ggplot(aes(x = ClosedCycleNumber / Term),
+             data = subset(loans, LP_CustomerPayments > 0 
+                             & ClosedCycleNumber > 0
+                             & Term == 36)) +
+  geom_histogram(binwidth = 0.33) +
+  scale_x_continuous(breaks = seq(0, 1, 0.33)) +
+  coord_cartesian(xlim = c(0, 1.2)) +
+  facet_wrap(~ LoanStatus.bucketed, ncol = 1)
+
+with(subset(loans, LP_CustomerPayments > 0 
+                             & ClosedCycleNumber > 0
+                             & Term == 36),
+  by(ClosedCycleNumber / Term,
+   LoanStatus.bucketed,
+   summary)
+  )
+```
+
+The first plot above shows that most defaulted loans have a principal loss ("net" here means that recovery and collections payments are included, though these are uncommon enough that "net" principal loss is approximately the same as "gross" principal loss, which ignores recoveries) that is greater than 50% of the original principal amount. This suggests defaults occur early in the loan's life.
+
+The second plot above reinforces this idea by using the "ClosedCycleNumber" (i.e. the first month of default) and "term" length columns to plot when in a 36-month-term loan's life a final payment or default occurs. The IQR for when in a loan's life default occurs is 28% to 64%, with relatively few defaults occuring after 75% into the loan's lifespan. Because most loans are 3 year terms, I binned the 2nd plot into 4 sections roughly corresponding to the 1st, 2nd, and 3rd years and one final bin for full term. The 2nd plot shows most defaults to occur in the first or second year of the loan.
+
+As an investor, it is therefore important to adequately evaluate borrowers to find those who will be unlikely to default, as the nature of when defaults occur in a loan's lifespan means that losses are often heavy.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, Univariate_Plots_Borrowers}
+ggplot(aes(x = IncomeRange), data = loans) +
+  geom_bar(stat = 'count') +
+  coord_flip() 
+
+ggplot(aes(x = EmploymentStatus), data = loans) +
+  geom_bar(stat = 'count') +
+  coord_flip() 
+```
+
+Here I wanted to quickly take a look at some of the borrower characteristic columns just to get a very high level feel for the member population in the data set. The majority of members are employed or full-time, and the majority have annual incomes between 25k and 75k. Interestingly, there are about 6 times more loans for income ranges 75k+ than <25k. This could be because of the credit check requirements for obtaining Prosper Loans forcing the lowest income borrowers to alternative loan options such as pay day lenders.
+
+# Univariate Analysis
+
+### What is the structure of your dataset?
+This data set contains 113,937 loans with 81 variables on each loan, including loan amount, borrower rate (or interest rate), current loan status, borrower income, borrower employment status, borrower credit history, and the latest payment information. (Last updated 03/11/2014)
+
+
+### What is/are the main feature(s) of interest in your dataset?
+Used the spreadsheet here: https://docs.google.com/spreadsheets/d/1gDyi_L4UvIrLTEC6Wri5nbaMmkGmLQBk-Yx3z0XDEtI/edit#gid=0
+
+ListingCreationDate helps to differentiate loans created at various points in Prosper's existence. CreditGrade and ProsperRating are the underwriting values given to loans by Prosper. LoanStatus can separate default and completed loans from current loans. Term, OriginalPrincipalAmount, and BorrowerRate are important characteristics of the loan itself.  
+
+Payment and return features include Prosper's estimated loss and return variables, as well as borrower cumulative payments and loan write offs.
+
+### What other features in the dataset do you think will help support your investigation into your feature(s) of interest?
+The data set contains many of the features related to credit scoring (number of credit inquiries, revolving credit, credit utilization). It might be interesting to see how these relate to both the Prosper ratings given before the loan origination and whether or not those loans ultimately default or complete.
+
+### Did you create any new variables from existing variables in the dataset?
+In addition to listing creation date related variables, I also created a "LoanStatus.bucketed" variable which binned multiple LoanStatuses together for easier analysis.
+
+I also created a "ClosedCycleNumber" which compares closed date for defaulted, charged off, and completed loans to the loan origination date. Combining with the term length of the loan will allow us to identify how quickly loans are paid off or go into default.
+
+### Of the features you investigated, were there any unusual distributions? Did you perform any operations on the data to tidy, adjust, or change the form of the data? If so, why did you do this?
+The important thing to keep in mind about this data set is that Prosper (and marketplace lending in general) is a relatively young company, and that the data set covers multiple "eras" of Prosper's operations. Pre-2009 data and Post-2009 data populate different columns and so plotting these columns will show large numbers of "NA" or blank values.
+
+After tidying and formatting the listing creation datetime column into easier to use columns such as "year created" and "year-month created", the largest surprise distribution was in plotting loans by creation year. This revealed that loans created within 15 months of the data set's creation make up a disproprotionately large fraction of the data. 
+
+Loans created in 2013 and later can be said to make up a third "era" of loans, as these rows in the dataset will mostly be "current", use post-2009 underwriting ratings, and were created at a time of tremendous growth for Prosper (a very different environment than say 2005 when Prosper issued only 23 loans!)
+
+
+# Bivariate Plots Section
+```{r echo=FALSE, message=FALSE, warning=FALSE, Bivariate_Plots}
+# order the bucketed loan statuses for clearer coloring in bar plots
+loans$LoanStatus.bucketed <- factor(loans$LoanStatus.bucketed,
+                 levels = c("Completed","Defaulted","Current"),
+                 ordered = T)
+
+# plot loan statuses by year of listing creation
+ggplot(aes(x = ListingCreation.year,
+           color = LoanStatus.bucketed,
+           fill = LoanStatus.bucketed),
+       data = loans) +
+  geom_bar(stat = 'count') +
+  scale_colour_brewer(palette = "Set2") +
+  scale_fill_brewer(palette = "Set2") +
+  theme(legend.position = "bottom",
+        legend.title = element_blank())
+
+# plot loans from target years by loan rating
+p1 <- ggplot(aes(x = CreditGrade,
+           color = LoanStatus.bucketed,
+           fill = LoanStatus.bucketed,
+           title = 'Closed Loans Created in 2006-08'),
+       data = subset(loans, ListingCreation.year %in% c(2006, 2007, 2008)
+                    & LoanStatus.bucketed != 'Current'
+                    & CreditGrade %in% 
+                      c('A', 'AA', 'B', 'C', 'D', 'E', 'HR'))) +
+  geom_bar(stat = 'count') +
+  scale_colour_brewer(palette = "Set2") +
+  scale_fill_brewer(palette = "Set2") +
+  theme(legend.position = "bottom",
+        legend.title = element_blank())
+
+p2 <- ggplot(aes(x = ProsperRating..Alpha.,
+           color = LoanStatus.bucketed,
+           fill = LoanStatus.bucketed,
+           title = 'Closed Loans Created in 2010'),
+       data=subset(loans, ListingCreation.year == 2010
+                    & LoanStatus.bucketed != 'Current')) +
+  geom_bar(stat = 'count') +
+  scale_colour_brewer(palette = "Set2") +
+  scale_fill_brewer(palette = "Set2") +
+  theme(legend.position = "bottom",
+        legend.title = element_blank())
+
+grid.arrange(p1, p2, ncol = 1)
+```
+
+For bivariate analyses, I first wanted to plot our loans by listing creation year and loan status as of the data pull in March of 2014. Because loan creation years 2011 onwards have a significant fraction of loans still current (i.e. not defaulted or completely paid off), I compared loans created in 2010 with loans created in the final three years using the pre-2009 "CreditGrade" scores. I chose 2010 because it is the only post-2009 "ProsperRating" underwriting year in the dataset that has a majority of its loans completed or closed (defaulted).
+
+For each letter grade, a smaller fraction of loans from 2010 went into default compared to loans issued between 2006 and 2008 using the old "CreditGrade" rating scale. One thing I noticed was that 2006 E and HR CreditGrade loans had a particularly high volume of Default and Charged Off loans, especially considering the relatively low volume of loans created in 2006 compared with 2007 and 2008. 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, Bivariate_Plots2}
+p3 <- ggplot(aes(x = ProsperRating..Alpha.,
+           color = LoanStatus.bucketed,
+           fill = LoanStatus.bucketed,
+           title = 'Loans Created in 2011'),
+       data = subset(loans, ListingCreation.year == 2011)) +
+  geom_bar(stat = 'count') +
+  scale_colour_brewer(palette = "Set2") +
+  scale_fill_brewer(palette = "Set2") +
+  theme(legend.position = "bottom",
+        legend.title = element_blank())
+
+p3 # in R studio, uncommment and run this grid.arrange(), but for 
+# knitting just show plot 3
+# grid.arrange(p1,p2,p3,ncol=1)
+```
+
+Adding 2011 loans continues to suggest that fewer loans issued post-2009 went into default, though the trend is harder to discern for 2011 loans due to a large fraction of those loans not yet being old enough to come to full term. Though the lower defaults for post-2009 loans can be easily suggested via quick graphs, it is less clear what factors contributed to this apparant trend: Prosper's post-2009 rating and underwriting changes may play a role. The Great-Recession and slow recovery may also have played a greater default effect on pre-2009 loans as opposed to post-2009 loans.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, closedcyclenumber_vs_status}
+
+ggplot(data=subset(loans, ClosedCycleNumber > 0),
+       aes(y = 100 * ClosedCycleNumber / Term,
+                      x = LoanStatus.bucketed)) +
+  geom_boxplot() + 
+  scale_y_continuous(breaks = c(0, 33, 67, 100, 133)) +
+  labs(y = '% into loan life when closed')
+
+```
+
+The plot above uses the "Closed Cycle Number" to see when in a loan's lifespan the loan was completed (paid off in full) or defaulted (includes charged off.) 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, closedcyclenumber_vs_status_data}
+
+head(subset(loans, ClosedCycleNumber > Term)[,c('ListingCreationDate',
+                                                'Term',
+                                                'ClosedCycleNumber',
+                                                'LoanStatus',
+                                                'ClosedDate',
+                                                'CreditGrade',
+                                                'ProsperRating..Alpha.',
+                                                'LoanFirstDefaultedCycleNumber',
+                                                'LoanOriginalAmount',
+                                                'LoanOriginationDate',
+                                                'LP_CustomerPayments',
+                                                'LP_CustomerPrincipalPayments',
+                                                'LP_GrossPrincipalLoss',
+                                                'LP_NonPrincipalRecoverypayments'
+                                                )])
+```
+
+It is interesting that there are loans with default cycle numbers higher than their original term length. This is could be due to the way Prosper gives borrowers many months before officially declaring a loan defaulted, or could be from a borrower falling behind in payments earlier in a loan's lifespan, restarting payments, and ultimately defaulting again (the earlier lapse in payments leading to a *total* length of time between loan origination and final default greater than the original term length of the loan).
+
+# Bivariate Analysis
+
+### Talk about some of the relationships you observed in this part of the investigation. How did the feature(s) of interest vary with other features in the dataset?
+To me, the most interesting features in this dataset are the loanstatus (useful for comparing loans which defaulted with those which were completely paid off and those which are still currently being serviced) and the "grade" of the loan (useful for analyzing how the "grade" of the loan correlates with default rates.)
+
+Loan grade (whether using the older, pre-2009 system called "CreditGrade" or the newer, post-2009 system called "ProsperRating") did seem to correlate well with frequency of loan defaults, though the main graph I use to illustrate this has been moved to the final section of "multivariate" graphs.  
+
+The loan creation year (useful for analyzing how loans have changed over time as Prosper itself has evolved) also proved to be very useful for comparing defaulted loans with completed loans. This is because most loans created in 2011 and later were still "current": meaning the borrowers were still actively paying off these loans. 
+
+A surprising find was the relationship between loan creation year and default rate, by loan grade. It is surprising that loans created in 2006-2008 (and graded using "CreditGrade") defaulted at greater frequency when compared to their "ProsperRating" counterparts created in 2010.
+
+It is unclear whether this is an indication of "ProsperRating" being a more accurate predictor of default risk than "CreditGrade", or if this is simply a result of post-2009 loans being issued in a more stable, post-recession economy.
+
+### Did you observe any interesting relationships between the other features (not the main feature(s) of interest)?
+The feature "ClosedCycleNumber" shows when in the lifespan of a loan it was paid off, charged off, or declared defaulted. Most bad loans have a close date (i.e. date loan was declared defaulted) less than 67% into the full term length of the loan. For a typical 3 year loan, this means most loan defaults occur between the loan's 1st and 2nd birthday. It was surprising that many defaulted loans have a closed date listed as being *after* the loan's original full termination ending date.
+
+### What was the strongest relationship you found?
+Despite changing rating systems midway into this dataset's reporting period, the rating systems (both CreditRating for pre-2009 and ProsperRating for 2009 onwards) are the strongest predictors of default and charge off rate.
+
+
+
+# Multivariate Plots Section
+```{r echo=FALSE, message=FALSE, warning=FALSE, defaults}
+
+#by(loans$LoanStatus, loans$ListingCreation.year, table)
+
+ggplot(data = subset(loans, ClosedCycleNumber > 0 &
+                     LoanStatus.bucketed == 'Defaulted' &
+                     ListingCreation.year < 2009 &
+                     CreditGrade != '')
+       ,aes(y = 100 * ClosedCycleNumber / Term,
+            x = CreditGrade)) + 
+  geom_boxplot() + 
+  scale_y_continuous(breaks = c(0, 33, 67, 100)) +
+  coord_cartesian(ylim = c(0, 100)) +
+  facet_wrap( ~ ListingCreation.year,
+             ncol = 1) +
+  labs(y = '% into loan life when defaulted') + 
+  geom_hline(yintercept =  c(33,67,100), linetype = 3)
+
+ggplot(data = subset(loans, ClosedCycleNumber > 0 &
+                     LoanStatus.bucketed == 'Defaulted' &
+                     ListingCreation.year > 2009 &
+                     ListingCreation.year < 2013 &
+                     ProsperRating..Alpha. != '')
+       ,aes(y = 100 * ClosedCycleNumber / Term,
+            x = ProsperRating..Alpha.)) +
+  geom_boxplot() + 
+  scale_y_continuous(breaks = c(0, 33, 67, 100)) +
+  coord_cartesian(ylim = c(0, 100)) +
+  facet_wrap( ~ ListingCreation.year,
+             ncol = 1) +
+  labs(y = '% into loan life when defaulted') + 
+  geom_hline(yintercept =  c(33,67,100), linetype = 3)
+
+```
+
+For the above plots, I wanted to see *when, in the lifespan of the loan,* defaults and charge offs were occuring. No matter the year created, underwriting system, or assigned grade: the majority of loans seem to default between one and two thirds of the way into their original full term length.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, defaults.by.year.and.rating}
+loan.year.statuses <- subset(loans, 
+                             ClosedCycleNumber > 0 &
+                             CreditGrade != '' & 
+                             CreditGrade != 'NC' &
+                             ListingCreation.year %in% c(2006, 2007, 2008)) %>%
+  group_by(ListingCreation.year, 
+           CreditGrade,
+           LoanStatus.bucketed) %>%
+  summarise(num.by.loan.status = n()) %>%
+  # add relative frequency of loan status by year and creditgrade
+  mutate(freq = num.by.loan.status / sum(num.by.loan.status))
+
+p1 <- ggplot(data = subset(loan.year.statuses,
+                           LoanStatus.bucketed == 'Defaulted'),
+       aes(y = freq, x = ListingCreation.year,
+                 color = CreditGrade)) +
+  geom_point() +
+  geom_line(aes(group = CreditGrade)) +
+  coord_cartesian(ylim = c(0, 0.7)) +
+  theme(legend.position = "bottom",
+        legend.title = element_blank()) + 
+  ggtitle('by CreditGrade') + 
+  labs(y="rate of default and charge off")
+
+loan.year.statuses.2010 <- subset(loans, 
+                             ClosedCycleNumber > 0 &
+                             ProsperRating..Alpha. != '' & 
+                             ListingCreation.year %in% c(2010)) %>%
+  group_by(ListingCreation.year, 
+           ProsperRating..Alpha.,
+           LoanStatus.bucketed) %>%
+  summarise(num.by.loan.status = n()) %>%
+  # add relative frequency of loan status by year and creditgrade
+  mutate(freq = num.by.loan.status / sum(num.by.loan.status))
+
+p2 <- ggplot(data = subset(loan.year.statuses.2010,
+                           LoanStatus.bucketed == 'Defaulted'),
+       aes(y = freq, x = ListingCreation.year,
+                 color = ProsperRating..Alpha.)) +
+  geom_point() +
+  geom_line(aes(group = ProsperRating..Alpha.)) +
+  coord_cartesian(ylim = c(0, 0.7)) +
+  theme(legend.position = "bottom",
+        legend.title = element_blank()) +
+  ggtitle('by ProsperRating') + 
+  labs(y="rate of default and charge off")
+
+
+grid.arrange(p1, p2, ncol = 2)
+
+#interesting but ultimately unused plot code:
+#ggplot(aes(x=ifelse(LP_NetPrincipalLoss>0, 
+#                    -1 * LP_NetPrincipalLoss/LoanOriginalAmount
+#                    ,LP_CustomerPrincipalPayments/LoanOriginalAmount)
+#                    ,y=LP_CustomerPayments/LoanOriginalAmount
+#           ,color=LoanStatus.bucketed
+#           ),
+#       data=loans) +
+#  geom_point(alpha=.05) +
+#  scale_y_continuous(breaks=seq(0,2,.25)) +
+#  scale_x_continuous(breaks=seq(-1,1,.25)) +
+#  coord_cartesian(xlim=c(-1,1),ylim=c(0,2)) +
+#  geom_hline(yintercept=1) +
+#  scale_color_brewer(type='qual', 
+#                     guide=guide_legend(title='status'
+#                                        ,reverse=FALSE
+#                                        ,override.aes=list(alpha=1,size=2)))
+
+```
+
+Here again I dove into the default and charged off loans from 2006-2008 and 2010, which are the only years in the dataset with a high fraction of *completed* loans. The frequency of defaults and charge offs seems to have generally increased for 2007 loans, as the recession came closer and the volume of loans created by Prosper grew quickly. Loans created in 2008 had generally lower default and charge off frequencies, while loans in 2010 (which used the new rating system "ProsperRating") had by far the lowest default and charge off rates. 
+
+# Multivariate Analysis
+
+### Talk about some of the relationships you observed in this part of the investigation. Were there features that strengthened each other in terms of looking at your feature(s) of interest?
+No matter the rating, underwriting system, or even when they were created, the majority of loans that default do so between one-third and two-thirds of the way into their original term lifespan.
+
+### Were there any interesting or surprising interactions between features?
+There was a spike in default rate for loans created in 2007. Loans created in 2010, the first full year with data on completed "ProsperScore" loans, had much lower default rates than their 2006-2008 predecessors.
+
+------
+
+# Final Plots and Summary
+
+### Plot One
+```{r echo=FALSE, message=FALSE, warning=FALSE, Plot_One}
+
+ggplot(aes(y = 100.0 * LP_CustomerPayments / LoanOriginalAmount,
+           x = LoanStatus.bucketed)
+             , data = subset(loans, LP_CustomerPayments > 0)) +
+  geom_boxplot() + 
+  geom_hline(yintercept = 100, linetype = 3) +
+  labs(y = "%",
+       x = "Loan Status") + 
+  ggtitle("Percent of Principal Paid")
+  
+```
+
+### Description One
+The majority of completed (paid-in-full) borrowers pay back their lendors with interest while the majority of defaulted borrowers fail to pay even three quarters of their original principal. The majority of loans current as of March 2014 (when the dataset was pulled) were relatively early in their terms.
+
+### Plot Two
+```{r echo=FALSE, message=FALSE, warning=FALSE, Plot_Two}
+
+loans$Close.yearmonth <- save_as_factor(
+  loans$ClosedDate, '%Y%m')
+
+loans$combined.grade <- ifelse(loans$ProsperRating..Alpha.=="AA","AA",
+      ifelse(loans$CreditGrade=="AA","AA",
+      ifelse(loans$ProsperRating..Alpha.=="A","A",
+      ifelse(loans$CreditGrade=="A","A",
+      ifelse(loans$ProsperRating..Alpha.=="B","B",
+      ifelse(loans$CreditGrade=="B","B",
+      ifelse(loans$ProsperRating..Alpha.=="C","C",
+      ifelse(loans$CreditGrade=="C","C",
+      ifelse(loans$ProsperRating..Alpha.=="D","D",
+      ifelse(loans$CreditGrade=="D","D",
+      ifelse(loans$ProsperRating..Alpha.=="E","E",
+      ifelse(loans$CreditGrade=="E","E",
+      ifelse(loans$ProsperRating..Alpha.=="HR","HR",
+      ifelse(loans$CreditGrade=="HR","HR","UNKNOWN"
+             ))))))))))))))
+
+ggplot(data = subset(loans, !is.na(ClosedDate) &
+                       combined.grade != 'UNKNOWN' #&
+                       #LoanStatus.bucketed == 'Defaulted'
+                     ),
+       aes(x = Close.yearmonth,
+           color = combined.grade,
+           fill  = combined.grade
+           )) +
+  geom_bar(stat = 'count') +
+  scale_x_discrete(breaks = seq(200701,201401,100),
+                   labels = seq(2007,2014,1)) +
+  theme(legend.position = "bottom",
+        legend.title = element_blank()) +
+  facet_wrap(~ LoanStatus.bucketed, ncol = 1) + 
+  labs(x = "Year of Final-Payment or Default",
+       y = "Number of Loans") +
+  ggtitle("Loan Volumes by Close Date")
+
+```
+
+### Description Two
+From 2007 to 2009, the number of defaulted loans was growing faster than the number of completed (paid-in-full) loans. But 2009 was a turning point for Prosper: the number of defaulted loans started to decrease and stabilize even as the number of completed loans started to greatly increase.
+
+
+### Plot Three
+```{r echo=FALSE, message=FALSE, warning=FALSE, Plot_Three}
+
+ggplot(aes(x = ListingCreation.year,
+           color = LoanStatus.bucketed,
+           fill = LoanStatus.bucketed),
+       data = loans) +
+  geom_bar(stat = 'count') +
+  scale_colour_brewer(palette = "Set2") +
+  scale_fill_brewer(palette = "Set2") +
+  theme(legend.position = "bottom",
+        legend.title = element_blank()) + 
+  labs(y = "Number of Loans",
+       x = "Year") +
+  ggtitle("Prosper Loans by Year of Loan Creation")
+
+```
+
+### Description Three
+This plot illustrates a few interesting quirks on the dataset of Prosper loan as prepared on March 2014: The frequency of defaults was very high for loans created before 2009. Prosper experienced tremendous growth starting in 2011. Prosper underwent a change to their loan underwriting in 2009, which may partially explain the apparant decrease in default rate starting with loans created in 2010 (though the data is not current enough to say for sure, because of the incredible amount of loans still current as of March 2014 when the dataset was created).
+
+------
+
+# Reflection
+I began this analysis by studying the nature of Prosper's business and the life cycle of a peer-to-peer loan (references below). After mentally selecting a few features of interest, I began my exploratory data analysis on the dataset in R via ggplot single variable visualizations such as histogram and boxplots. As I dove deeper into the data and started to plot multiple features together, I ran into issues with not knowing which ggplot layers would work with the different datatypes of my features. As someone more familiar with traditional SQL, I struggled at first with using R to identify outliers and feature quirks (negative payment amounts, etc).
+
+The majority of the 90,831 Prosper members in the data set have only created a single loan listing. It would be interesting to see updated Prosper data to see if this is still the case today, two and a half years after the dataset was pulled in March 2014. You can see that the vast majority of loans are for 3 year terms, and because the largest fraction of loans were created within 1-2 years of the data set being created, many of the *huge* wave of newer members are still in their first loan's original term.  
+
+Many things have happened in the past two and a half years and it would be interesting to explore updated Prosper data to tease out any effects from: the slow but steady economic recovery (i.e. there is nothing on the scale of the 2008 Great Recession which may skew default rates independent of underwriting), the aforementioned explosive growth of loan volume issued by Prosper starting in 2011, and the rise of institutional investors, such as hedge funds, as heavy lendors to the Prosper (this shift in *who* is investing in Prosper-type loans is so great that "marketplace lending" is now the preferred term for services like Prosper, whereas such a service would have been called "peer-to-peer lending" in the early pre-2009 days of the website).
+
+
+### Sources
+*Peter Renton, a.k.a. "sln-10", and his LendAcademy.com blog are a great source for learning about marketplace lending*
+
+> http://www.lendacademy.com/updated-super-simple-filter-strategies-for-lending-club-and-prosper/
+
+> http://www.lendacademy.com/my-quarterly-p2p-lending-results-q3-2015/
+
+> http://youtu.be/9jW7EiGVxdQ
+
+> http://www.lendacademy.com/new-p2p-lending-reality/
+
+> http://www.lendacademy.com/overview-p2p-automation-analytics-sites-part-1/
+
+> http://www.lendacademy.com/p2p-lending-best-practices-2016-an-investors-guide/#more-12949
+
+*NSR Invest is an analytics company which has a blog discussing the Prosper API which is the source of the 2014 Prosper dataset used in this analysis*
+> https://www.nsrinvest.com/blog/
+
+> https://www.prosper.com/Downloads/Services/Documentation/ProsperAPI_Objects_Details.html
+
+*A techcrunch article on how Prosper and others have changed since the 2014 dataset was created:*
+> http://techcrunch.com/2016/01/24/the-evolving-nature-of-p2p-lending-marketplaces/
+
+*And finally, a few Udacity and Hadley Wickham R syntax and design resources I used heavily in the making of this EDA write-up:*
+> https://docs.google.com/document/d/1-f3wM3mJSkoWxDmPjsyRnWvNgM57YUPloucOIl07l4c/pub
+
+> https://s3.amazonaws.com/content.udacity-data.com/courses/ud651/diamondsExample_2016-05.html
+
+> https://www.google.com/url?q=https://s3.amazonaws.com/udacity-hosted-downloads/ud651/prosperLoanData.csv&sa=D&ust=1467967023321000&usg=AFQjCNEh2uuYEm_lE4BK-ONh_TO_FGdlBg
+
+> http://adv-r.had.co.nz/Style.html
